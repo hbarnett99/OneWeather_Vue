@@ -1,19 +1,24 @@
-# Team 1
+# OneWeather
 
-This is the project repo for team 1 of FIT2101 S2 2021.
+## Project setup
+```
+npm install
+```
 
-## Links
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
 
-[Google drive](https://drive.google.com/drive/u/1/folders/0AE06mPfab3N6Uk9PVA)
+### Compiles and minifies for production
+```
+npm run build
+```
 
-[Trello board](https://trello.com/b/bZ4LVjBQ/oneweather)
+### Lints and fixes files
+```
+npm run lint
+```
 
-[Git repo (this)](https://git.infotech.monash.edu/fit2101-s2-2021-projects/jcla0016)
-
-## Changelog
-
-27/08/2021 Added project plan and other artefacts
-- Project plan
-- Analysis of alternatives
-- Risk register
-- User stories and epics
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
