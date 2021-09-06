@@ -1,0 +1,39 @@
+{
+  "root": true,
+  "env": {
+    "node": true
+  },
+  "plugins": ["jsdoc"],
+  "extends": [
+    "plugin:vue/vue3-essential",
+    "eslint:recommended",
+    "prettier",
+    "plugin:jsdoc/recommended"
+  ],
+  "parserOptions": {
+    "parser": "babel-eslint"
+  },
+  "rules": {
+    "no-console": "off",
+    "dot-notation": [
+      2,
+      {
+        "allowPattern": "^[a-z]+(_[a-z]+)+$"
+      }
+    ],
+    "import/no-unresolved": "off",
+    "import/prefer-default-export": "off",
+    "semi": "error",
+    "jsdoc/require-property-type": "off",
+    "jsdoc/require-returns-type": "off",
+    "jsdoc/require-param-type": "off",
+    "jsdoc/no-undefined-types": "off",
+    "indent": [
+      "warn",
+      2,
+      {
+        "SwitchCase": 1
+      }
+    ]
+  }
+}
