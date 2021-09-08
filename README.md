@@ -10,7 +10,7 @@ This is the project repo for team 1 of FIT2101 S2 2021.
 
 [Git repo (this)](https://git.infotech.monash.edu/fit2101-s2-2021-projects/jcla0016)
 
-## Changelog
+## Release Notes
 
 27/08/2021 Added project plan and other artefacts
 - Project plan
