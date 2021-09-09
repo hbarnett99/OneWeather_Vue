@@ -1,16 +1,19 @@
 <template>
-  <img alt="one weather logo" src="./assets/ow_logo.png">
-  <HelloWorld/>
+  <img alt="one weather logo" src="./assets/ow_logo.png"> 
+  <SearchCoords />
+
 </template>
 
+
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import SearchCoords from './components/SearchCoords.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    SearchCoords
   }
+  
 };
 </script>
 
@@ -21,6 +24,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 10px;
 }
 </style>
