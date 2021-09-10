@@ -16,18 +16,18 @@ export default {
         `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(searchLocation)}.json?access_token=${this.access_token}`
       );
       // [lng,lat]
-      this.coordinates = response.data.features[0].geometry.coordinates;
-      console.log(this.coordinates);
-      this.location = response.data.features[0].place_name;
+      const coordinates = response.data.features[0].geometry.coordinates;
+      this.$emit('coords-fetch', coordinates);
     }
   },
+  emits: ['coords-fetch']
 };
 
 </script>
-  
+
 
 <template>
-   
+
     <div>
       <input ref = "location" />
       <button
@@ -59,4 +59,3 @@ a {
   color: #42b983;
 }
 </style>
-
