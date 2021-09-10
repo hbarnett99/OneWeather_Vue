@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Stars</h1>
+    <h1>Planets</h1>
     <ul :key="star.name" v-for="star in stars">
       <li >
         <Star :star="star" />
