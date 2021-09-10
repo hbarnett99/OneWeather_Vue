@@ -1,8 +1,5 @@
 <script>
 import axios from "axios";
-// import mapboxgl from "mapbox-gl";
-// import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
-// import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 export default {
   data() {
     return {
@@ -19,14 +16,9 @@ export default {
         `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(searchLocation)}.json?access_token=${this.access_token}`
       );
       // [lng,lat]
-      console.log(response.data.features[0].geometry.coordinates);
-      var coords = response.data.features[0].geometry.coordinates;
       this.coordinates = response.data.features[0].geometry.coordinates;
-      alert(coords);
       console.log(this.coordinates);
-      alert(this.coordinates);
       this.location = response.data.features[0].place_name;
-      console.log(this.location);
     }
   },
 };
