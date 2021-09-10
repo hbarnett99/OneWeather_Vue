@@ -1,6 +1,8 @@
 <template>
   <img alt="one weather logo" src="./assets/ow_logo.png">
   <SearchCoords />
+  <navbar />
+  <Weather />
 
 </template>
 
@@ -9,15 +11,16 @@
 // import HelloWorld from './components/HelloWorld.vue';
 import navbar from './components/template/navbar';
 import SearchCoords from './components/SearchCoords.vue';
+import Weather from './components/Weather';
 
 export default {
   name: 'App',
   components: {
     // HelloWorld
     navbar,
-    SearchCoords
-  }
-
+    SearchCoords,
+    Weather,
+  },
 };
 
 
