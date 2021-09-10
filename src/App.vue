@@ -1,15 +1,14 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <HorizonStars/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import HorizonStars from './components/HorizonStars.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    HorizonStars
   }
 };
 </script>
