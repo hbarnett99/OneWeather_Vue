@@ -18,6 +18,14 @@ This is the project repo for team 1 of FIT2101 S2 2021.
 - Risk register
 - User stories and epics
 
+10/09/2021 Sprint - Added working demo for weather app
+- Weather data retrieved from API
+- Search function implemented to retrieve coordinates from a location
+- Apex chart demo implemented using weather data
+- Planet list included
+- Basic app format produced and integrated with above features
+- 17 story points completed during this sprint
+
 ## Project setup
 ```
 npm install
