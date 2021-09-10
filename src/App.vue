@@ -3,7 +3,10 @@
   <SearchCoords />
   <navbar />
   <Weather />
-
+  <HelloWorld msg="Hello World"/>
+  <div>
+    <DemoChart/>
+  </div>
 </template>
 
 
@@ -12,15 +15,18 @@
 import navbar from './components/template/navbar';
 import SearchCoords from './components/SearchCoords.vue';
 import Weather from './components/Weather';
+import HelloWorld from './components/HelloWorld.vue';
+import DemoChart from './components/Chart.vue';
 
 export default {
-  name: 'App',
+  name: 'app',
   components: {
     // HelloWorld
     navbar,
     SearchCoords,
     Weather,
-  },
+    HelloWorld, DemoChart
+  }
 };
 
 

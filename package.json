@@ -18,7 +18,9 @@
     "mapbox-gl": "^2.4.1",
     "node-geocoder": "^3.27.0",
     "opencage-api-client": "^1.0.0",
-    "vue-axios": "^3.3.6"
+    "vue-axios": "^3.3.6",
+    "apexcharts": "^3.28.1",
+    "vue3-apexcharts": "^1.4.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
