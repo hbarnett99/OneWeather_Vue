@@ -147,7 +147,7 @@
                     <Weather :data="data" />
                   </div>
                   <div class="card-body" style="position: relative;">
-                    <DemoChart/>
+                    <DemoChart :dates="dates" :temps="temps"/>
                   </div>
                   <div class="card-body" style="position: relative;">
                     <HorizonStars />
@@ -234,7 +234,9 @@ export default {
   },
   data() {
     return {
-      data: {}
+      data: {},
+      dates: [],
+      temps: []
     };
   },
   methods: {
@@ -245,7 +247,11 @@ export default {
         axios.get(`http://api.weatherapi.com/v1/forecast.json?key=721ef4891d454f2385304513211009&q=${lat},${lng}&days=7`)
           .then(response => {
             this.data = response.data;
-            console.log(this.data);
+            this.dates = this.data.forecast.forecastday.map(({date}) => date);
+            this.temps = this.data.forecast.forecastday.map(({day}) => day.avgtemp_c);
+            console.log(this.dates);
+            console.log(this.temps);
+            console.log(this.data.forecast.forecastday);
           });
 
     }

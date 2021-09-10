@@ -12,21 +12,33 @@ export default {
   components: {
     apexcharts: VueApexCharts,
   },
-  data: function() {
+  props: {
+    dates: Array,
+    temps: Array
+  },
+  data() {
     return {
       chartOptions: {
         chart: {
           id: 'basic-bar'
         },
         xaxis: {
-          categories: ["03/09", "04/09", "05/09", "06/09", "07/09", "08/09", "09/09"]
+          categories: this.dates
         }
       },
       series: [{
         name: 'Temperature',
-        data: [23, 17, 15, 13, 20, 23, 25]
+        data: this.temps
       }]
     };
   },
+  watch: {
+    dates() {
+      this.chartOptions.xaxis.categories = this.dates;
+    },
+    temps() {
+      this.series[0].data = this.temps;
+    }
+  }
 };
 </script>
