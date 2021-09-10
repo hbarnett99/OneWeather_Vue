@@ -7,6 +7,7 @@
   <div>
     <DemoChart/>
   </div>
+  <HorizonStars />
 </template>
 
 
@@ -17,15 +18,18 @@ import SearchCoords from './components/SearchCoords.vue';
 import Weather from './components/Weather';
 import HelloWorld from './components/HelloWorld.vue';
 import DemoChart from './components/Chart.vue';
+import HorizonStars from './components/HorizonStars.vue';
 
 export default {
-  name: 'app',
+  name: 'App',
   components: {
     // HelloWorld
     navbar,
     SearchCoords,
     Weather,
-    HelloWorld, DemoChart
+    HelloWorld,
+    DemoChart,
+    HorizonStars
   }
 };
 
