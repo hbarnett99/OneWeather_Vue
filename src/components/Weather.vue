@@ -1,31 +1,47 @@
 <template>
   <header>
     <h1>Weather</h1>
+    ---------------------------
   </header>
   <div>
-    <h2> {{ data.name }} </h2>
-  </div>
-  <div>
-    <h3>{{ data.main.temp }} </h3>
+    <h2> Location: {{ data?.location?.name }} </h2>
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    <h3> Today: {{ data?.current?.last_updated }}</h3>
+    <h3> {{ data?.current?.condition.text }}</h3>
+    ---------------------------
+    <h4> Temperature (Feels Like): {{ data?.current?.feelslike_c }} </h4>
+    <h4> Temperature (Actual): {{ data?.current?.temp_c }} </h4>
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    <h3> Forecast </h3>
+    ---------------------------
+    <div v-for="day in data?.forecast?.forecastday" :key="day.message">
+       <h4> Date: {{ day.date }} || {{ day?.day?.condition?.text}}</h4>
+       <h4> Average: {{ day?.day?.avgtemp_c }} </h4>
+       <h4> Max: {{ day?.day?.maxtemp_c }} </h4>
+       ---------------------------
+   </div>
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~
   </div>
 </template>
 
 <script>
 import axios from 'axios';
-window.axios = require('axios');
 
 export default {
   name: "Weather",
   data() {
     return {
-      data: {}
+      data: {list:undefined}
     };
   },
   mounted()
   {
-    axios.get("https://api.openweathermap.org/data/2.5/weather?q=Melbourne&appid=b15ee66b6734f621e9793d0ed66b3eff")
-      .then(response => this.data = response.data);
-      /*.then(response => console.log(response.data));*/
+    axios.get("http://api.weatherapi.com/v1/forecast.json?key=721ef4891d454f2385304513211009&q=Melbourne&days=7")
+      .then(response => {
+        this.data = response.data;
+        console.log(response.data);
+
+      });
   },
 };
 
