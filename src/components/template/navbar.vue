@@ -141,7 +141,7 @@
                     <h4>Container</h4>
                   </div>
                   <div class="card-body" style="position: relative;">
-
+                    INSERT COMPONENT HERE
                   </div>
                 </div>
               </div>
