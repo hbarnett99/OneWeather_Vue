@@ -1,18 +1,23 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <navbar></navbar>
+  <img alt="one weather logo" src="./assets/ow_logo.png">
+  <SearchCoords />
+
 </template>
+
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue';
 import navbar from './components/template/navbar';
+import SearchCoords from './components/SearchCoords.vue';
 
 export default {
   name: 'App',
   components: {
     // HelloWorld
-    navbar
-  },
+    navbar,
+    SearchCoords
+  }
+
 };
 
 
@@ -29,9 +34,7 @@ export default {
   /*color: #2c3e50;*/
   /*margin-top: 60px;*/
 
-@import 'css/app.css';
-
-
+  @import 'css/app.css';
 }
 
 
