@@ -144,7 +144,7 @@
                     <SearchCoords @coords-fetch="handleCoords" />
                   </div>
                   <div class="card-body" style="position: relative;">
-                    <Weather />
+                    <Weather :data="data" />
                   </div>
                   <div class="card-body" style="position: relative;">
                     <DemoChart/>
@@ -222,6 +222,7 @@ import SearchCoords from './components/SearchCoords.vue';
 import Weather from './components/Weather';
 import DemoChart from './components/Chart.vue';
 import HorizonStars from './components/HorizonStars.vue';
+import axios from 'axios';
 
 export default {
   name: 'App',
@@ -232,11 +233,21 @@ export default {
     HorizonStars
   },
   data() {
-    return {};
+    return {
+      data: {}
+    };
   },
   methods: {
     handleCoords([lng, lat]) {
-      console.log(lng, lat);
+
+      console.log(lat, lng);
+      if (lng && lat)
+        axios.get(`http://api.weatherapi.com/v1/forecast.json?key=721ef4891d454f2385304513211009&q=${lat},${lng}&days=7`)
+          .then(response => {
+            this.data = response.data;
+            console.log(this.data);
+          });
+
     }
   }
 };

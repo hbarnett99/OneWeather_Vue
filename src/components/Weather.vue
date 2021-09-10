@@ -25,23 +25,10 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
   name: "Weather",
-  data() {
-    return {
-      data: {list:undefined}
-    };
-  },
-  mounted()
-  {
-    axios.get("http://api.weatherapi.com/v1/forecast.json?key=721ef4891d454f2385304513211009&q=Melbourne&days=7")
-      .then(response => {
-        this.data = response.data;
-        console.log(response.data);
-
-      });
+  props: {
+    data: {}
   },
 };
 
