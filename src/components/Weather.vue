@@ -16,8 +16,10 @@
     ---------------------------
     <div v-for="day in data?.forecast?.forecastday" :key="day.message">
        <h4> Date: {{ day.date }} || {{ day?.day?.condition?.text}}</h4>
-       <h4> Average: {{ day?.day?.avgtemp_c }} </h4>
-       <h4> Max: {{ day?.day?.maxtemp_c }} </h4>
+       <h4> Average: {{ day?.day?.avgtemp_c }} C</h4>
+       <h4> Max: {{ day?.day?.maxtemp_c }} C </h4>
+       <h4> Precipitation: {{ day?.day?.totalprecip_mm }} mm </h4>
+       <h4> Chance of rain: {{ day?.day?.daily_chance_of_rain }} % </h4>
        ---------------------------
    </div>
    ~~~~~~~~~~~~~~~~~~~~~~~~~~

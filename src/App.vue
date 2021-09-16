@@ -249,6 +249,7 @@ export default {
             this.data = response.data;
             this.dates = this.data.forecast.forecastday.map(({date}) => date);
             this.temps = this.data.forecast.forecastday.map(({day}) => day.avgtemp_c);
+            console.log(this.data);
             console.log(this.dates);
             console.log(this.temps);
             console.log(this.data.forecast.forecastday);
