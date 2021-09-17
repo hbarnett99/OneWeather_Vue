@@ -6,8 +6,14 @@
   <div>
     <h2> Location: {{ data?.location?.name }} </h2>
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    <h3> Today: {{ data?.current?.last_updated }}</h3>
-    <h3> {{ data?.current?.condition.text }}</h3>
+
+    <h3> Today: {{ data?.current?.last_updated }} || {{ data?.current?.condition.text }}</h3>
+
+    <h3> Last Week: {{ data_lastweek?.forecast?.forecastday[0]?.date}} || Max Temp: {{ data_lastweek?.forecast?.forecastday[0]?.day?.maxtemp_c}}
+    || Difference from Today: {{ temp1 }} C </h3>
+
+    <h3> Yesterday: {{ data_yesterday?.forecast?.forecastday[0]?.date}} || Max Temp: {{ data_yesterday?.forecast?.forecastday[0]?.day?.maxtemp_c}}
+    || Difference from Today: {{ temp2 }} C </h3>
     ---------------------------
     <h4> Temperature (Feels Like): {{ data?.current?.feelslike_c }} </h4>
     <h4> Temperature (Actual): {{ data?.current?.temp_c }} </h4>
@@ -30,8 +36,16 @@
 export default {
   name: "Weather",
   props: {
-    data: {}
+    data: {},
+    data_lastweek: {},
+    data_yesterday: {}
   },
+  updated() {
+    this.temp1 = (parseInt(this.data?.forecast?.forecastday[0]?.day?.maxtemp_c) - parseInt(this.data_lastweek?.forecast?.forecastday[0]?.day?.maxtemp_c)).toString();
+    this.temp2 = (parseInt(this.data?.forecast?.forecastday[0]?.day?.maxtemp_c) - parseInt(this.data_yesterday?.forecast?.forecastday[0]?.day?.maxtemp_c)).toString();
+    console.log(this.temp1);
+    console.log(this.temp2);
+  }
 };
 
 </script>
