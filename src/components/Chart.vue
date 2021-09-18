@@ -34,10 +34,20 @@ export default {
   },
   watch: {
     dates() {
-      this.chartOptions.xaxis.categories = this.dates;
+      this.updateChart();
+      //this.chartOptions.xaxis.categories = this.dates;
     },
     temps() {
       this.series[0].data = this.temps;
+    }
+  },
+  methods: {
+    updateChart() {
+      this.chartOptions = {
+        xaxis: {
+          categories: this.dates
+        }
+      };
     }
   }
 };
