@@ -1,6 +1,6 @@
 <template>
   <div>
-    <StarsAvailable />
+    <StarsAvailable @btn-click="handleWatch" />
   </div>
   <div>
     <h1>Watched stars</h1>
@@ -14,15 +14,28 @@
 
 <script>
 import StarsAvailable from "./StarsAvailable.vue";
+import Star from "./Star.vue";
+
+const STAR_WATCH_KEY = "star-watch";
+
 export default {
   name: 'StarWatch',
   components: {
-    StarsAvailable
+    StarsAvailable,
+    Star
   },
   data() {
+    const stars = JSON.parse(window.localStorage.getItem(STAR_WATCH_KEY) ?? "[]");
+
     return {
-      stars: []
+      stars
     };
+  },
+  methods: {
+    handleWatch(star) {
+      this.stars = [...this.stars, star];
+      window.localStorage.setItem(STAR_WATCH_KEY, JSON.stringify(this.stars));
+    }
   }
 };
 </script>

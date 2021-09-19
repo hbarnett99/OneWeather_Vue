@@ -1,11 +1,18 @@
 <template>
-    <button type="button" @click="this.$emit('btn-click')">{{name}}</button>
+    <button @click="onClick()">{{text}}</button>
 </template>
 
 <script>
 export default {
+  name: "Button",
   props: {
-    name: String
+    text: String,
+    id: String
+  },
+  methods: {
+    onClick() {
+      this.$emit("btn-click", this.id);
+    }
   },
   emits: ["btn-click"]
 };

@@ -4,13 +4,15 @@
     <ul :key="star.name" v-for="star in stars">
       <li >
         <Star :star="star" />
+        <Button text="Add" :id="star.name" @btn-click="onClick" />
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-import Star from './Star';
+import Star from './Star.vue';
+import Button from "./Button.vue";
 export default {
   name: 'StarsAvailable',
   data() {
@@ -19,7 +21,14 @@ export default {
     };
   },
   components: {
-    Star
-  }
+    Star,
+    Button
+  },
+  methods: {
+    onClick(name) {
+      this.$emit('btn-click', this.stars.find((s) => s.name == name));
+    }
+  },
+  emits: ["btn-click"]
 };
 </script>
