@@ -150,7 +150,7 @@
                     <DemoChart :dates="dates" :temps="temps"/>
                   </div>
                   <div class="card-body" style="position: relative;">
-                    <HorizonStars />
+                    <StarWatch />
                   </div>
                 </div>
               </div>
@@ -221,7 +221,7 @@
 import SearchCoords from './components/SearchCoords.vue';
 import Weather from './components/Weather';
 import DemoChart from './components/Chart.vue';
-import HorizonStars from './components/HorizonStars.vue';
+import StarWatch from './components/StarWatch.vue';
 import axios from 'axios';
 
 export default {
@@ -230,7 +230,7 @@ export default {
     SearchCoords,
     Weather,
     DemoChart,
-    HorizonStars
+    StarWatch
   },
   data() {
     return {

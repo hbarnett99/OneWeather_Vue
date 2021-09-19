@@ -1,6 +1,9 @@
 <template>
   <div>
-    <h1>Planets</h1>
+    <StarsAvailable />
+  </div>
+  <div>
+    <h1>Watched stars</h1>
     <ul :key="star.name" v-for="star in stars">
       <li >
         <Star :star="star" />
@@ -10,14 +13,16 @@
 </template>
 
 <script>
-import Star from './Star';
+import StarsAvailable from "./StarsAvailable.vue";
 export default {
-  name: 'StarList',
-  props: {
-    stars: Array
-  },
+  name: 'StarWatch',
   components: {
-    Star
+    StarsAvailable
+  },
+  data() {
+    return {
+      stars: []
+    };
   }
 };
 </script>
