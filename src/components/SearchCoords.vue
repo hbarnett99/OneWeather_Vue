@@ -1,12 +1,12 @@
 <template>
 
       <div class="map-holder">
-        <button
+        <!-- <button
         type="button"
         class="location-btn"
         @click="createMap"
       >Search by map
-      </button>
+      </button> -->
        <div id="map"></div>
       </div>
     
@@ -40,10 +40,12 @@ export default {
     };
   },
   mounted(){
-    this.createMap;
+    console.log("create map");
+    this.createMap();
   },
   methods: {
     async createMap(){
+      console.log("======== map =========");
       mapboxgl.accessToken = this.access_token;
       this.map = new mapboxgl.Map({
         container: "map",
@@ -51,37 +53,20 @@ export default {
         center: this.center,
         zoom: 11,
       });
-      this.map.on('click', (e) => {
-        console.log(e.lngLat.lat);
-        const lat = e.lngLat.lat;
-        const lng = e.lngLat.lng;
-        const coordinates1 = [lng,lat];
+      this.map.on('click', (response) => {
+        // const lat = e.lngLat.lat;
+        // const lng = e.lngLat.lng;
+        const coordinates = [response.lngLat.lng,response.lngLat.lat];
  
-        var marker = new mapboxgl.Marker({ "color": "#FF8C00" });
-        marker.setLngLat(coordinates1);
-        marker.addTo(this.map);
-        this.$emit('coords-fetch', coordinates1);
+        // var marker = new mapboxgl.Marker({ "color": "#FF8C00" });
+        // marker.setLngLat(coordinates);
+        // marker.addTo(this.map);
+        this.map.flyTo({
+          center: coordinates
+        });
+        this.$emit('coords-fetch', coordinates);
 
       });
-     
-      // let geocoder =  new MapboxGeocoder({
-      //   accessToken: this.access_token,
-      //   mapboxgl: mapboxgl,
-      //   marker: false,
-      // }); 
-      // this.map.addControl(geocoder);
-      // geocoder.on("result", (e) => {
-      //   const marker = new mapboxgl.Marker({
-      //     draggable: true,
-      //     color: "#D80739",
-      //   })
-      //     .setLngLat(e.result.center)
-      //     .addTo(this.map);
-      //   this.center = e.result.center;
-      //   marker.on("dragend", (e) => {
-      //     this.center = Object.values(e.target.getLngLat());
-      //   });
-      // });
 
     },
     async getCoords() {
@@ -92,12 +77,15 @@ export default {
       );
       // [lng,lat]
       const coordinates = response.data.features[0].geometry.coordinates;
-      var marker = new mapboxgl.Marker({ "color": "#FF8C00" });
-      marker.setLngLat(coordinates);
-      marker.addTo(this.map);
-      this.map.flyTo({
-        center: coordinates
-      });
+      console.log(this.map, "===================");
+      if (this.map){
+        // var marker = new mapboxgl.Marker({ "color": "#FF8C00" });
+        // marker.setLngLat(coordinates);
+        // marker.addTo(this.map);
+        this.map.flyTo({
+          center: coordinates
+        });
+      }
       this.$emit('coords-fetch', coordinates);
     }
   },
