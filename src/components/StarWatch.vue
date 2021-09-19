@@ -1,10 +1,10 @@
 <template>
   <div>
     <h1>Watched stars</h1>
-    <table :key="star.name" v-for="star in stars">
+    <table :key="star.name + star.designations ?? ''" v-for="star in stars">
       <td >
         <Star :star="star" />
-        <Button text="Remove" :id="star.name" @btn-click="onClick" />
+        <Button text="Remove" :id="star.name + star.designations ?? ''" @btn-click="onClick" />
       </td>
     </table>
   </div>
@@ -39,14 +39,14 @@ export default {
   methods: {
     handleWatch(star) {
       // Don't add duplicatess
-      if (!this.stars.find(({name}) => name == star.name)) {
+      if (!this.stars.find(({name}) => name === star.name + star.designations ?? '')) {
         this.stars = [...this.stars, star];
         set(this.stars);
       }
     },
     onClick(n) {
       // Remove star with name n
-      this.stars = this.stars.filter(({name}) => name != n);
+      this.stars = this.stars.filter((star) => n != (star.name + star.designations ?? ''));
       set(this.stars);
     }
   }

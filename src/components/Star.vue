@@ -1,6 +1,6 @@
 <template>
   <span>
-    Name: {{star.name}}, {{star["above-horizon"] ? "Above" : "Below"}} Horizon
+    Name: {{star.name || star.designations}}, {{star["above-horizon"] ? "Above" : "Below"}} Horizon
   </span>
 </template>
 
