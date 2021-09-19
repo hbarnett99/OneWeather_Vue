@@ -1,51 +1,49 @@
 <template>
 
   <div id="app">
+    <div id="nav">
+      <router-link to="/about">About</router-link>
+    </div>
+
+
+<!---------------------------------------------->
+
     <div id="sidebar" class="active">
       <div class="sidebar-wrapper active ps ps--active-y">
         <div class="sidebar-header">
           <div class="d-flex justify-content-between">
             <div class="logo">
-              <a href="http://localhost:63342/mazer-main/dist/index.html"><img src="https://icons-for-free.com/iconfiles/png/512/fog+foggy+weather+icon-1320196634851598977.png" alt="Logo" srcset="" title="" style=""></a>
-            </div>
-            <div class="toggler">
-              <a href="http://localhost:63342/mazer-main/dist/index.html?_ijt=fo496p42bbqi1gjvq2pneetq&amp;_ij_reload=RELOAD_ON_SAVE#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+              <img src="https://icons-for-free.com/iconfiles/png/512/fog+foggy+weather+icon-1320196634851598977.png" alt="Logo" srcset="" title="" style="">
             </div>
           </div>
         </div>
         <div class="sidebar-menu">
           <ul class="menu">
             <li class="sidebar-title">Menu</li>
-
-            <li class="sidebar-item active ">
-              <a href="http://localhost:63342/mazer-main/dist/index.html" class="sidebar-link">
+<!-- ----------------------------------------------------- -->
+            <li class="sidebar-item">
+              <router-link to="/" class="sidebar-link">
                 <i class="bi bi-grid-fill"></i>
                 <span>Home</span>
-              </a>
+              </router-link>
             </li>
-            <li class="sidebar-item  has-sub">
-              <a href="http://localhost:63342/mazer-main/dist/index.html?_ijt=fo496p42bbqi1gjvq2pneetq&amp;_ij_reload=RELOAD_ON_SAVE#" class="sidebar-link">
-                <i class="bi bi-stack"></i>
-                <span>Accordian</span>
-              </a>
-              <ul class="submenu" style="display: none;">
-                <li class="submenu-item ">
-                  <a href="http://localhost:63342/mazer-main/dist/component-alert.html">Item 1</a>
-                </li>
-                <li class="submenu-item ">
-                  <a href="http://localhost:63342/mazer-main/dist/component-badge.html">Item 2</a>
-                </li>
-                <li class="submenu-item ">
-                  <a href="http://localhost:63342/mazer-main/dist/component-breadcrumb.html">Item 3</a>
-                </li>
-              </ul>
+
+            <li class="sidebar-item">
+              <router-link to="/stars" class="sidebar-link">
+                <i class="bi bi-grid-fill"></i>
+                <span>Stars</span>
+              </router-link>
             </li>
+
+
+
+<!-- ----------------------------------------------------- -->
             <li class="sidebar-title">Submenu</li>
-            <li class="sidebar-item  ">
-              <a href="http://localhost:63342/mazer-main/dist/table.html" class="sidebar-link">
-                <i class="bi bi-grid-1x2-fill"></i>
-                <span>Table</span>
-              </a>
+            <li class="sidebar-item"> <!-- use sidebar-item-active for bolding of button-->
+              <router-link to="/about" class="sidebar-link">
+                <i class="bi bi-grid-fill"></i>
+                <span>About</span>
+              </router-link>
             </li>
           </ul>
         </div>
@@ -60,6 +58,7 @@
       </header>
       <div class="page-heading">
         <h3>Profile Statistics</h3>
+        <router-view />
       </div>
       <div class="page-content">
         <section class="row">
