@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <span>
     Name: {{star.name}}, {{star["above-horizon"] ? "Above" : "Below"}} Horizon
-  </div>
+  </span>
 </template>
 
 <script>

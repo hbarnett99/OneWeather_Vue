@@ -1,15 +1,15 @@
 <template>
   <div>
-    <StarsAvailable @btn-click="handleWatch" />
-  </div>
-  <div>
     <h1>Watched stars</h1>
-    <ul :key="star.name" v-for="star in stars">
-      <li >
+    <table :key="star.name" v-for="star in stars">
+      <td >
         <Star :star="star" />
         <Button text="Remove" :id="star.name" @btn-click="onClick" />
-      </li>
-    </ul>
+      </td>
+    </table>
+  </div>
+  <div>
+    <StarsAvailable @btn-click="handleWatch" />
   </div>
 </template>
 

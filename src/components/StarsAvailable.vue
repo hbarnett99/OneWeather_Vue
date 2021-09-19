@@ -1,12 +1,12 @@
 <template>
   <div>
     <h1>Stars</h1>
-    <ul :key="star.name" v-for="star in stars">
-      <li >
+    <table :key="star.name" v-for="star in stars">
+      <td >
         <Star :star="star" />
         <Button text="Add" :id="star.name" @btn-click="onClick" />
-      </li>
-    </ul>
+      </td>
+    </table>
   </div>
 </template>
 
