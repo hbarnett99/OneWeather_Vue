@@ -13,12 +13,18 @@
 <script>
 import Star from './Star.vue';
 import Button from "./Button.vue";
+
 export default {
   name: 'StarsAvailable',
   data() {
     return {
-      stars: [{name:"Mercury",aboveHorizon:true,nakedEyeObject:false},{name:"Venus",aboveHorizon:true,nakedEyeObject:false},{name:"Moon",aboveHorizon:true,nakedEyeObject:false},{name:"Mars",aboveHorizon:true,nakedEyeObject:false},{name:"Jupiter",aboveHorizon:true,nakedEyeObject:false},{name:"Saturn",aboveHorizon:true,nakedEyeObject:false},{name:"Neptune",aboveHorizon:true,nakedEyeObject:false}]
+      stars: []
     };
+  },
+  async created() {
+    const res = await fetch("http://localhost:8090/api/objects/listobjectsbytype?type=SolarSystem:planet");
+    const stars = await res.json();
+    this.stars = stars.map((name) => ({name}));
   },
   components: {
     Star,
