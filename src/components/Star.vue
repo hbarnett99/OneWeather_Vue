@@ -1,6 +1,6 @@
 <template>
   <div>
-    Name: {{star.name}}
+    Name: {{star.name}}, {{star["above-horizon"] ? "Above" : "Below"}} Horizon
   </div>
 </template>
 

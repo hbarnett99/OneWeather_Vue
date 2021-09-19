@@ -14,6 +14,16 @@
 import Star from './Star.vue';
 import Button from "./Button.vue";
 
+/**
+ * Fetch a star
+ *
+ * @param name Name of stellar object
+ * @returns Information of star
+ */
+async function fetchStar(name) {
+  return await fetch(`http://localhost:8090/api/objects/info?format=json&name=${name}`);
+}
+
 export default {
   name: 'StarsAvailable',
   data() {
@@ -24,7 +34,12 @@ export default {
   async created() {
     const res = await fetch("http://localhost:8090/api/objects/listobjectsbytype?type=SolarSystem:planet");
     const stars = await res.json();
-    this.stars = stars.map((name) => ({name}));
+    for (const s of stars) {
+      const res = await fetchStar(s);
+      const star = await res.json();
+      this.stars = [...this.stars, star];
+      console.log(star);
+    }
   },
   components: {
     Star,
