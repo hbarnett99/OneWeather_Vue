@@ -7,6 +7,7 @@
     <ul :key="star.name" v-for="star in stars">
       <li >
         <Star :star="star" />
+        <Button text="Remove" :id="star.name" @btn-click="onClick" />
       </li>
     </ul>
   </div>
@@ -15,14 +16,18 @@
 <script>
 import StarsAvailable from "./StarsAvailable.vue";
 import Star from "./Star.vue";
+import Button from "./Button.vue";
 
 const STAR_WATCH_KEY = "star-watch";
+
+const set = (stars) => window.localStorage.setItem(STAR_WATCH_KEY, JSON.stringify(stars));
 
 export default {
   name: 'StarWatch',
   components: {
     StarsAvailable,
-    Star
+    Star,
+    Button
   },
   data() {
     const stars = JSON.parse(window.localStorage.getItem(STAR_WATCH_KEY) ?? "[]");
@@ -33,8 +38,16 @@ export default {
   },
   methods: {
     handleWatch(star) {
-      this.stars = [...this.stars, star];
-      window.localStorage.setItem(STAR_WATCH_KEY, JSON.stringify(this.stars));
+      // Don't add duplicatess
+      if (!this.stars.find(({name}) => name == star.name)) {
+        this.stars = [...this.stars, star];
+        set(this.stars);
+      }
+    },
+    onClick(n) {
+      // Remove star with name n
+      this.stars = this.stars.filter(({name}) => name != n);
+      set(this.stars);
     }
   }
 };
