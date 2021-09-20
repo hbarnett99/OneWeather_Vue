@@ -52,7 +52,7 @@ export default {
         container: "map",
         style: "mapbox://styles/mapbox/streets-v11",
         center: this.center,
-        zoom: 11,
+        zoom: 12,
       });
       this.map.on('click', (e) => {
         const lat = e.lngLat.lat;
@@ -79,10 +79,9 @@ export default {
       // [lng,lat]
       
 
-      const lat = response.data.features[0].geometry.coordinates[1];
-      const lng = response.data.features[0].geometry.coordinates[0];
-      this.coordinates[0] = lng;
-      this.coordinates[1] = lat;
+      this.coordinates[1] = response.data.features[0].geometry.coordinates[1];
+      this.coordinates[0] = response.data.features[0].geometry.coordinates[0];
+      
 
      
       this.$emit('coords-fetch', this.coordinates);
@@ -95,7 +94,7 @@ export default {
       
       
       if (this.allMarkers!==null) {
-        for (var i = this.allMarkers.length - 1; i >= 0; i--) {
+        for (var i = 0; i < this.allMarkers.length; i++) {
           this.allMarkers[i].remove();
         }
       }
