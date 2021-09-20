@@ -1,19 +1,15 @@
 <template>
 
   <div id="app">
-    <div id="nav">
-      <router-link to="/about">About</router-link>
-    </div>
-
 
 <!---------------------------------------------->
 
     <div id="sidebar" class="active">
-      <div class="sidebar-wrapper active ps ps--active-y">
+      <div class="sidebar-wrapper active ps ps--active-y scroll-hidden">
         <div class="sidebar-header">
           <div class="d-flex justify-content-between">
             <div class="logo">
-              <img src="https://icons-for-free.com/iconfiles/png/512/fog+foggy+weather+icon-1320196634851598977.png" alt="Logo" srcset="" title="" style="">
+              <img src="@/assets/ow_logo.png" alt="Logo" srcset="" title="" style="">
             </div>
           </div>
         </div>
@@ -57,12 +53,12 @@
         </a>
       </header>
       <div class="page-heading">
-        <h3>Profile Statistics</h3>
-        <router-view />
+        <h3>OneWeather</h3>
       </div>
       <div class="page-content">
         <section class="row">
           <div class="col-12 col-lg-9">
+            <!-- The following code is for the 'cards' that would appear above the container
             <div class="row">
               <div class="col-6 col-lg-3 col-md-6">
                 <div class="card">
@@ -132,27 +128,20 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
+
             <div class="row">
+
+<!--        Start of Container      -->
+
               <div class="col-12">
                 <div class="card">
-                  <div class="card-header">
-                    <h4>Container</h4>
-                  </div>
-                  <div class="card-body" style="position: relative;">
-                    <SearchCoords @coords-fetch="handleCoords" />
-                  </div>
-                  <div class="card-body" style="position: relative;">
-                    <Weather :data="data" />
-                  </div>
-                  <div class="card-body" style="position: relative;">
-                    <DemoChart :dates="dates" :temps="temps"/>
-                  </div>
-                  <div class="card-body" style="position: relative;">
-                    <HorizonStars />
-                  </div>
+                  <router-view />
                 </div>
               </div>
+
+<!--        End of Container      -->
+
             </div>
           </div>
           <div class="col-12 col-lg-3">
@@ -217,44 +206,9 @@
 </template>
 
 <script>
-import SearchCoords from './components/SearchCoords.vue';
-import Weather from './components/Weather';
-import DemoChart from './components/Chart.vue';
-import HorizonStars from './components/HorizonStars.vue';
-import axios from 'axios';
 
 export default {
-  name: 'App',
-  components: {
-    SearchCoords,
-    Weather,
-    DemoChart,
-    HorizonStars
-  },
-  data() {
-    return {
-      data: {},
-      dates: [],
-      temps: []
-    };
-  },
-  methods: {
-    handleCoords([lng, lat]) {
-
-      console.log(lat, lng);
-      if (lng && lat)
-        axios.get(`http://api.weatherapi.com/v1/forecast.json?key=721ef4891d454f2385304513211009&q=${lat},${lng}&days=7`)
-          .then(response => {
-            this.data = response.data;
-            this.dates = this.data.forecast.forecastday.map(({date}) => date);
-            this.temps = this.data.forecast.forecastday.map(({day}) => day.avgtemp_c);
-            console.log(this.dates);
-            console.log(this.temps);
-            console.log(this.data.forecast.forecastday);
-          });
-
-    }
-  }
+  name: 'App'
 };
 
 </script>
@@ -262,4 +216,5 @@ export default {
 <style scoped>
 @import 'css/app.css';
 @import 'css/bootstrap.css';
+@import 'css/custom.css';
 </style>

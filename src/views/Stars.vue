@@ -1,10 +1,24 @@
 <template>
-  <h1>Welcome to the Stars!</h1>
+
+  <div class="card-header">
+    <h2>Stars</h2>
+  </div>
+  <div class="card-body" style="position: relative;">
+    <HorizonStars />
+  </div>
+
 </template>
 
 <script>
+
+import HorizonStars from "@/components/HorizonStars";
+
 export default {
-  name: "Stars"
+  name: "Stars",
+
+  components: {
+    HorizonStars
+  },
 };
 </script>
 

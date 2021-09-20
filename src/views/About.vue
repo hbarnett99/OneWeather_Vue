@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <h1>Welcome to the About page~!</h1>
+
+  <div class="card-header">
+    <h2>About</h2>
   </div>
+
 </template>
 
 <script>

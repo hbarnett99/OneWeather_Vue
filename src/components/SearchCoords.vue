@@ -29,10 +29,10 @@ export default {
 <template>
 
     <div>
-      <input ref = "location" />
+      <input ref = "location" placeholder="Location" class="dataTable-input" />
       <button
         type="button"
-        class="location-btn"
+        class="location-btn btn btn-outline-secondary mx-2"
         @click="getCoords"
       >
         Search
