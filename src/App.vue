@@ -147,7 +147,7 @@
                     <Weather :data="data" />
                   </div>
                   <div class="card-body" style="position: relative;">
-                    <DemoChart :dates="dates" :temps="temps"/>
+                    <DemoChart :dates="dates" :temps="temps" :precipitation="precipitation"/>
                   </div>
                   <div class="card-body" style="position: relative;">
                     <StarWatch />
@@ -236,7 +236,8 @@ export default {
     return {
       data: {},
       dates: [],
-      temps: []
+      temps: [],
+      precipitation: []
     };
   },
   methods: {
@@ -249,9 +250,11 @@ export default {
             this.data = response.data;
             this.dates = this.data.forecast.forecastday.map(({date}) => date);
             this.temps = this.data.forecast.forecastday.map(({day}) => day.avgtemp_c);
+            this.precipitation = this.data.forecast.forecastday.map(({day}) => day.daily_chance_of_rain);
             console.log(this.dates);
             console.log(this.temps);
             console.log(this.data.forecast.forecastday);
+            console.log(this.precipitation);
           });
 
     }
