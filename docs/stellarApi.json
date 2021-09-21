@@ -1,0 +1,106 @@
+[
+  { "key": "AsterismMgr", "name": "Asterisms", "name_i18n": "Asterisms" },
+  {
+    "key": "ConstellationMgr",
+    "name": "Constellations",
+    "name_i18n": "Constellations"
+  },
+  {
+    "key": "NebulaMgr",
+    "name": "Deep-sky objects",
+    "name_i18n": "Deep-sky objects"
+  },
+  {
+    "key": "NebulaMgr:0",
+    "name": "Bright galaxies",
+    "name_i18n": "Bright galaxies"
+  },
+  {
+    "key": "NebulaMgr:1",
+    "name": "Active galaxies",
+    "name_i18n": "Active galaxies"
+  },
+  { "key": "NebulaMgr:10", "name": "Nebulae", "name_i18n": "Nebulae" },
+  {
+    "key": "NebulaMgr:100",
+    "name": "Messier Catalogue",
+    "name_i18n": "Messier Catalogue"
+  },
+  {
+    "key": "NebulaMgr:101",
+    "name": "Caldwell Catalogue",
+    "name_i18n": "Caldwell Catalogue"
+  },
+  {
+    "key": "NebulaMgr:102",
+    "name": "Barnard Catalogue",
+    "name_i18n": "Barnard Catalogue"
+  },
+  {
+    "key": "NebulaMgr:152",
+    "name": "Jack Bennett's deep sky catalogue",
+    "name_i18n": "Jack Bennett's deep sky catalogue"
+  },
+  {
+    "key": "NebulaMgr:4",
+    "name": "Bright quasars",
+    "name_i18n": "Bright quasars"
+  },
+  { "key": "Satellites", "name": "Satellites", "name_i18n": "Satellites" },
+  { "key": "SolarSystem", "name": "Solar System", "name_i18n": "Solar System" },
+  {
+    "key": "SolarSystem:dwarf planet",
+    "name": "Dwarf planets",
+    "name_i18n": "Dwarf planets"
+  },
+  {
+    "key": "SolarSystem:interstellar object",
+    "name": "Interstellar objects",
+    "name_i18n": "Interstellar objects"
+  },
+  { "key": "SolarSystem:moon", "name": "Moons", "name_i18n": "Moons" },
+  { "key": "SolarSystem:planet", "name": "Planets", "name_i18n": "Planets" },
+  { "key": "SolarSystem:plutino", "name": "Plutinos", "name_i18n": "Plutinos" },
+
+  { "key": "StarMgr", "name": "Stars", "name_i18n": "Stars" },
+  {
+    "key": "StarMgr:0",
+    "name": "Interesting double stars",
+    "name_i18n": "Interesting double stars"
+  },
+  {
+    "key": "StarMgr:1",
+    "name": "Interesting variable stars",
+    "name_i18n": "Interesting variable stars"
+  },
+  {
+    "key": "StarMgr:2",
+    "name": "Bright double stars",
+    "name_i18n": "Bright double stars"
+  },
+  {
+    "key": "StarMgr:3",
+    "name": "Bright variable stars",
+    "name_i18n": "Bright variable stars"
+  },
+  {
+    "key": "StarMgr:4",
+    "name": "Bright stars with high proper motion",
+    "name_i18n": "Bright stars with high proper motion"
+  },
+  {
+    "key": "StarMgr:5",
+    "name": "Variable stars: Algol-type eclipsing systems",
+    "name_i18n": "Variable stars: Algol-type eclipsing systems"
+  },
+  {
+    "key": "StarMgr:6",
+    "name": "Variable stars: the classical cepheids",
+    "name_i18n": "Variable stars: the classical cepheids"
+  },
+  {
+    "key": "StarMgr:7",
+    "name": "Bright carbon stars",
+    "name_i18n": "Bright carbon stars"
+  }
+]
