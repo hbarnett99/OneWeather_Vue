@@ -122,7 +122,20 @@ export default {
 
 
 
+<<<<<<< HEAD
 </script>
+=======
+    <div>
+      <input ref = "location" placeholder="Location" class="dataTable-input" />
+      <button
+        type="button"
+        class="location-btn btn btn-outline-secondary mx-2"
+        @click="getCoords"
+      >
+        Search
+      </button>
+  </div>
+>>>>>>> origin/Henry
 
 
 

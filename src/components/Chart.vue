@@ -1,6 +1,10 @@
 <template>
   <div class="example">
+<<<<<<< HEAD
     <apexcharts width="600" height="400" :options="chartOptions" :series="series"></apexcharts>
+=======
+    <apexcharts height="350" type="bar" :options="chartOptions" :series="series"></apexcharts>
+>>>>>>> origin/Henry
   </div>
 </template>
 
