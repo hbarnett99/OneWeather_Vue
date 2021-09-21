@@ -4,20 +4,20 @@
     <h2>Stars</h2>
   </div>
   <div class="card-body" style="position: relative;">
-    <HorizonStars />
+    <StarWatch />
   </div>
 
 </template>
 
 <script>
 
-import HorizonStars from "@/components/HorizonStars";
+import StarWatch from "@/components/StarWatch";
 
 export default {
-  name: "Stars",
+  name: "Star Watch",
 
   components: {
-    HorizonStars
+    StarWatch
   },
 };
 </script>

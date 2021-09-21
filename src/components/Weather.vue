@@ -1,58 +1,29 @@
 <template>
-<<<<<<< HEAD
   <header>
-    <h1>Weather</h1>
-    ---------------------------
+    <h4> Location: {{ data?.location?.name }} </h4>
+    <hr/>
   </header>
   <div>
-    <h2> Location: {{ data?.location?.name }} </h2>
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    <strong> Today: {{ data?.current?.last_updated }} || {{ data?.current?.condition.text }}</strong>
 
-    <h3> Today: {{ data?.current?.last_updated }} || {{ data?.current?.condition.text }}</h3>
+    <p> Last Week: {{ data_lastweek?.forecast?.forecastday[0]?.date}} || Max Temp: {{ data_lastweek?.forecast?.forecastday[0]?.day?.maxtemp_c}}
+    || Difference from Today: {{ temp1 }}&#176; C</p>
 
-    <h3> Last Week: {{ data_lastweek?.forecast?.forecastday[0]?.date}} || Max Temp: {{ data_lastweek?.forecast?.forecastday[0]?.day?.maxtemp_c}}
-    || Difference from Today: {{ temp1 }} C </h3>
-
-    <h3> Yesterday: {{ data_yesterday?.forecast?.forecastday[0]?.date}} || Max Temp: {{ data_yesterday?.forecast?.forecastday[0]?.day?.maxtemp_c}}
-    || Difference from Today: {{ temp2 }} C </h3>
-    ---------------------------
-    <h4> Temperature (Feels Like): {{ data?.current?.feelslike_c }} </h4>
-    <h4> Temperature (Actual): {{ data?.current?.temp_c }} </h4>
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    <h3> Forecast </h3>
-    ---------------------------
+    <p> Yesterday: {{ data_yesterday?.forecast?.forecastday[0]?.date}} || Max Temp: {{ data_yesterday?.forecast?.forecastday[0]?.day?.maxtemp_c}}
+    || Difference from Today: {{ temp2 }}&#176; C </p>
+    <hr/>
+    <strong> Temperature (Feels Like): {{ data?.current?.feelslike_c }}&#176; C</strong>  <br/>
+    <strong> Temperature (Actual): {{ data?.current?.temp_c }}&#176; C</strong>
+    <hr/>
+    <h3> 3-Day Forecast </h3>
     <div v-for="day in data?.forecast?.forecastday" :key="day.message">
-       <h4> Date: {{ day.date }} || {{ day?.day?.condition?.text}}</h4>
-       <h4> Average: {{ day?.day?.avgtemp_c }} C</h4>
-       <h4> Max: {{ day?.day?.maxtemp_c }} C </h4>
-       <h4> Precipitation: {{ day?.day?.totalprecip_mm }} mm </h4>
-       <h4> Chance of rain: {{ day?.day?.daily_chance_of_rain }} % </h4>
-       ---------------------------
+       <strong> Date: {{ day.date }} || {{ day?.day?.condition?.text}}</strong>
+       <p> Average: {{ day?.day?.avgtemp_c }}&#176; C</p>
+       <p> Max: {{ day?.day?.maxtemp_c }}&#176; C</p>
+       <p> Precipitation: {{ day?.day?.totalprecip_mm }}mm </p>
+       <p class="content-divider"> Chance of rain: {{ day?.day?.daily_chance_of_rain }}% </p>
    </div>
-   ~~~~~~~~~~~~~~~~~~~~~~~~~~
   </div>
-=======
-    <header>
-      <h4>Location: {{ data?.location?.name }}</h4>
-      <hr />
-    </header>
-    <!-- Note: &#8451; is the HTML code for Celcius-->
-    <div>
-      <h5>Weather</h5>
-      <strong> Today: {{ data?.current?.last_updated }}</strong>
-      <p> {{ data?.current?.condition.text }}</p>
-      <p> Temperature (Feels Like): {{ data?.current?.feelslike_c }} &#8451;</p>
-      <p> Temperature (Actual): {{ data?.current?.temp_c }} &#8451;</p>
-      <hr />
-      <h5> 3-Day Forecast </h5>
-      <div v-for="day in data?.forecast?.forecastday" :key="day.message">
-        <strong> Date: {{ day.date }}</strong>
-        <p>{{ day?.day?.condition?.text}}</p>
-        <p> Average: {{ day?.day?.avgtemp_c }} &#8451;</p>
-        <p class="content-divider"> Max: {{ day?.day?.maxtemp_c }} &#8451;</p>
-      </div>
-    </div>
->>>>>>> origin/Henry
 </template>
 
 <script>

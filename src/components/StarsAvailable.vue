@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Stars</h1>
+    <h5>Stars Available</h5>
     <div style="height:200px;overflow:auto">
       <table :key="star.name + star.designations ?? ''" v-for="star in stars">
         <td >

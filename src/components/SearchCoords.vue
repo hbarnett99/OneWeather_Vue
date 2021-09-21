@@ -1,24 +1,24 @@
 <template>
 
-      <div class="map-holder">
-        <!-- <button
-        type="button"
-        class="location-btn"
-        @click="createMap"
-      >Search by map
-      </button> -->
-       <div id="map"></div>
-      </div>
-    
-    <div>
-      <input ref = "location" />
-      <button
-        type="button"
-        class="location-btn"
-        @click="getCoords"
-      >
-        Search
-      </button>
+  <div class="w-100">
+    <input ref = "location" placeholder="Location" class="dataTable-input" />
+    <button
+      type="button"
+      class="location-btn btn btn-outline-secondary mx-2"
+      @click="getCoords"
+    >
+      Search
+    </button>
+  </div>
+
+  <div class="map-holder m-3">
+    <!-- <button
+    type="button"
+    class="location-btn"
+    @click="createMap"
+    >Search by map
+    </button> -->
+    <div id="map"></div>
   </div>
 
 </template>
@@ -122,20 +122,7 @@ export default {
 
 
 
-<<<<<<< HEAD
 </script>
-=======
-    <div>
-      <input ref = "location" placeholder="Location" class="dataTable-input" />
-      <button
-        type="button"
-        class="location-btn btn btn-outline-secondary mx-2"
-        @click="getCoords"
-      >
-        Search
-      </button>
-  </div>
->>>>>>> origin/Henry
 
 
 
@@ -145,9 +132,11 @@ export default {
   width: 65%;
 }*/
 #map {
-  height: 50vh;
-  
-} 
+  height: 30vh;
+  /*width: 50%;*/
+  border-radius: 15px;
+
+}
 .Marker {
  color: pink;
 }
