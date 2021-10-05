@@ -2,10 +2,10 @@
   <div>
     <h5>Stars Available</h5>
     <div style="height:200px;overflow:auto">
-      <table :key="star.name + star.designations ?? ''" v-for="star in stars">
+      <table :key="starName(star)" v-for="star in stars">
         <td >
           <Star :star="star" />
-          <Button text="Add" :id="star.name + star.designations ?? ''" @btn-click="onClick" />
+          <Button text="Add" :id="starName(star)" @btn-click="onClick" />
         </td>
       </table>
     </div>
@@ -15,6 +15,7 @@
 <script>
 import Star from './Star.vue';
 import Button from "./Button.vue";
+import { starName } from "../util/star.js";
 
 const STELLAR_URL = "http://localhost:8090/api/objects";
 
@@ -39,10 +40,11 @@ export default {
     // Fetch names of stellar objects
     const resPlanets = await fetch(`${STELLAR_URL}/listobjectsbytype?type=SolarSystem:planet`);
     const planets = await resPlanets.json();
+    const planetsNoEarth = planets.filter(name => name !== "Earth");
     const resStars = await fetch(`${STELLAR_URL}/listobjectsbytype?type=StarMgr`);
     const stars = await resStars.json();
 
-    const objs = [].concat(planets, stars);
+    const objs = [].concat(planetsNoEarth, stars);
 
     // Fetch information for all stellar objects
     for (const s of objs) {
@@ -56,11 +58,12 @@ export default {
     Button
   },
   methods: {
+    starName,
     onClick(name) {
-      console.log(name, this.stars);
-      this.$emit('btn-click', this.stars.find((star) => name === star.name + star.designations ?? ''));
+      console.log(name);
+      this.$emit('added', this.stars.find((star) => name === starName(star)));
     }
   },
-  emits: ["btn-click"]
+  emits: ["added"]
 };
 </script>
