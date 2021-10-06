@@ -31,6 +31,13 @@
               </router-link>
             </li>
 
+            <li class="sidebar-item">
+              <router-link to="/Mars" class="sidebar-link">
+                <i class="bi bi-grid-fill"></i>
+                <span>Mars</span>
+              </router-link>
+            </li>
+
 
 
 <!-- ----------------------------------------------------- -->
