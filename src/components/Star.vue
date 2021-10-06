@@ -12,22 +12,46 @@ export default {
   },
   methods: {
     calculateVisibility: function () {
-      const { ambientLum, illumination, aboveHorizon } = this.star;
+      const { ambientLum, illumination, vmag } = this.star;
 
       // Cannot see star if it is below horizon
-      if (!aboveHorizon) {
-        return 0;
+      if (!this.star["above-horizon"]) {
+        return "-";
       }
 
-      return ambientLum * illumination * this.calculateBlockage();
+      // Multiplier applied for brightness
+      const brightness = (illumination ?? 100) / 100 * this.magnitudeMultiplier(vmag);
+
+      // Ambient light reduces visibility
+      const ambient = this.ambientMultiplier(ambientLum);
+
+      const visibility = ambient * brightness * (1 - this.calculateBlockage());
+
+      return visibility.toFixed(2);
+    },
+
+    ambientMultiplier(amb) {
+      if (amb > 50) return 1;  // TODO: Return 0 when done testing
+      return Math.min(1, 1/amb);
+    },
+
+    magnitudeMultiplier: function(vmag) {
+      if (vmag <= -1) return 100;
+      if (vmag > 6.5) return 0;
+      return 100 / (vmag + 2);
     },
 
     calculateBlockage: function() {
+      // Don't calculate without weather information
+      if (!this.weather) {
+        return 0;
+      }
+
       const isDay = !!this.weather.is_day;
 
       // Assume we can't see stars during day
       if (isDay) {
-        return 0;
+        // return 0;
       }
 
       const {
