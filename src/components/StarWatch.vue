@@ -4,7 +4,7 @@
     <div style="height:200px;overflow:auto">
       <table :key="starName(star)" v-for="star in stars">
         <td >
-          <Star :star="star" />
+          <Star :star="star" :weather="weather" />
           <Button text="Remove" :id="starName(star)" @btn-click="onClick" />
         </td>
       </table>
@@ -21,7 +21,8 @@ import { starName } from "../util/star.js";
 export default {
   name: 'StarWatch',
   props: {
-    stars: Array
+    stars: Array,
+    weather: Object
   },
   components: {
     Star,

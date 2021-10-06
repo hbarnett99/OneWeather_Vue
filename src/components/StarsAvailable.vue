@@ -4,7 +4,7 @@
     <div style="height:200px;overflow:auto">
       <table :key="starName(star)" v-for="star in stars">
         <td >
-          <Star :star="star" />
+          <Star :star="star" :weather="weather" />
           <Button text="Add" :id="starName(star)" @btn-click="onClick" />
         </td>
       </table>
@@ -31,6 +31,9 @@ async function fetchStellar(name) {
 
 export default {
   name: 'StarsAvailable',
+  props: {
+    weather: Object
+  },
   data() {
     return {
       stars: []
@@ -60,7 +63,6 @@ export default {
   methods: {
     starName,
     onClick(name) {
-      console.log(name);
       this.$emit('added', this.stars.find((star) => name === starName(star)));
     }
   },
