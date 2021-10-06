@@ -7,10 +7,10 @@
     <strong> Today: {{ data?.current?.last_updated }} || {{ data?.current?.condition.text }}</strong>
 
     <p> Last Week: {{ data_lastweek?.forecast?.forecastday[0]?.date}} || Max Temp: {{ data_lastweek?.forecast?.forecastday[0]?.day?.maxtemp_c}}
-    || Difference from Today: {{ temp1 }}&#176; C</p>
+    || Today is {{ temp1 }} C hotter temperature;</p>
 
     <p> Yesterday: {{ data_yesterday?.forecast?.forecastday[0]?.date}} || Max Temp: {{ data_yesterday?.forecast?.forecastday[0]?.day?.maxtemp_c}}
-    || Difference from Today: {{ temp2 }}&#176; C </p>
+    || Today is {{ temp2 }} C hotter temperature; </p>
     <hr/>
     <strong> Temperature (Feels Like): {{ data?.current?.feelslike_c }}&#176; C</strong>  <br/>
     <strong> Temperature (Actual): {{ data?.current?.temp_c }}&#176; C</strong>
@@ -34,11 +34,15 @@ export default {
     data_lastweek: {},
     data_yesterday: {}
   },
+
+  created() {
+    this.temp1 = (parseInt(this.data?.forecast?.forecastday[0]?.day?.maxtemp_c) - parseInt(this.data_lastweek?.forecast?.forecastday[0]?.day?.maxtemp_c));
+    this.temp2 = (parseInt(this.data?.forecast?.forecastday[0]?.day?.maxtemp_c) - parseInt(this.data_yesterday?.forecast?.forecastday[0]?.day?.maxtemp_c));
+  },
+
   updated() {
-    this.temp1 = (parseInt(this.data?.forecast?.forecastday[0]?.day?.maxtemp_c) - parseInt(this.data_lastweek?.forecast?.forecastday[0]?.day?.maxtemp_c)).toString();
-    this.temp2 = (parseInt(this.data?.forecast?.forecastday[0]?.day?.maxtemp_c) - parseInt(this.data_yesterday?.forecast?.forecastday[0]?.day?.maxtemp_c)).toString();
-    console.log(this.temp1);
-    console.log(this.temp2);
+    this.temp1 = (parseInt(this.data?.forecast?.forecastday[0]?.day?.maxtemp_c) - parseInt(this.data_lastweek?.forecast?.forecastday[0]?.day?.maxtemp_c));
+    this.temp2 = (parseInt(this.data?.forecast?.forecastday[0]?.day?.maxtemp_c) - parseInt(this.data_yesterday?.forecast?.forecastday[0]?.day?.maxtemp_c));
   }
 };
 

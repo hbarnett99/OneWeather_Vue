@@ -50,11 +50,6 @@ export default {
             this.dates = this.data.forecast.forecastday.map(({date}) => date);
             this.temps = this.data.forecast.forecastday.map(({day}) => day.avgtemp_c);
             this.precipitation = this.data.forecast.forecastday.map(({day}) => day.daily_chance_of_rain);
-            console.log(this.dates);
-            console.log(this.temps);
-            console.log(this.data.forecast.forecastday);
-            console.log(this.precipitation);
-            console.log(this.data);
           });
 
         var today = new Date();
@@ -75,6 +70,7 @@ export default {
         lastweek = dateOut;
 
         dateArr = yesterday.split("/");
+        dateArr = dateArr.reverse();
         dateOut = "";
         for (i = 0; i < dateArr.length; i++) {
           dateOut = dateOut.concat(dateArr[i]);
@@ -83,17 +79,17 @@ export default {
           }
         }
         yesterday = dateOut;
+        console.log("Yesterday = " + yesterday);
+        console.log("lastweek = " + lastweek);
 
         axios.get(`http://api.weatherapi.com/v1/history.json?key=721ef4891d454f2385304513211009&q=${lat},${lng}&dt=`+lastweek)
           .then(response => {
             this.data_lastweek = response.data;
-            console.log(this.data_lastweek);
           });
 
         axios.get(`http://api.weatherapi.com/v1/history.json?key=721ef4891d454f2385304513211009&q=${lat},${lng}&dt=`+yesterday)
           .then(response => {
             this.data_yesterday = response.data;
-            console.log(this.data_yesterday);
           });
       }
     },
