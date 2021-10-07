@@ -5,3 +5,12 @@
 .scroll-hidden {
     overflow: hidden;
 }
+
+.sidebar-backdrop {
+        -webkit-filter: blur(10px);     
+    filter: blur(10px);  
+}
+
+body{
+    min-width: 300px;
+}

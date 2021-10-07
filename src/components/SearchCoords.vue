@@ -1,10 +1,10 @@
 <template>
 
-  <div class="w-100">
-    <input ref = "location" placeholder="Location" class="dataTable-input" />
+  <div class="row px-4">
+    <input ref = "location" placeholder="Location" class="dataTable-input form-control form-control-sm w-75 col" @submit="getCoords"/>
     <button
       type="button"
-      class="location-btn btn btn-outline-secondary mx-2"
+      class="location-btn btn btn-outline-secondary btn-sm mx-2 col-auto"
       @click="getCoords"
     >
       Search
