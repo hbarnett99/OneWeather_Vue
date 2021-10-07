@@ -6,45 +6,46 @@
     <br>
     <br>
     <h3> Past 7 days </h3>
-      <div style="height:200px;overflow:auto">
-    <p> Sol: {{WeeklySols[0]}} </p>
+      <div style="height:350px;overflow:auto">
+    <strong> Sol: {{WeeklySols[0]}} </strong>
     <p> Date: {{WeeklyDays[0]}} </p>
     <p> Minimum temperature: {{WeeklyMinTemp[0]}}&#176; C </p>
     <p> Maximum temperature: {{WeeklyMaxTemp[0]}}&#176; C </p>
     <br>
-    <p> Weekly sol: {{WeeklySols[1]}} </p>
+    <strong> Sol: {{WeeklySols[1]}} </strong>
     <p> Date: {{WeeklyDays[1]}} </p>
     <p> Minimum temperature: {{WeeklyMinTemp[1]}}&#176; C </p>
     <p> Maximum temperature: {{WeeklyMaxTemp[1]}}&#176; C </p>
     <br>
-    <p> Weekly sol: {{WeeklySols[2]}} </p>
+    <strong> Sol: {{WeeklySols[2]}} </strong>
     <p> Date: {{WeeklyDays[2]}} </p>
     <p> Weekly  in temp: {{WeeklyMinTemp[2]}}&#176; C </p>
     <p> Maximum temperature: {{WeeklyMaxTemp[2]}}&#176; C </p>
     <br>
-    <p> Weekly sol: {{WeeklySols[3]}} </p>
+    <strong> Sol: {{WeeklySols[3]}} </strong>
     <p> Date: {{WeeklyDays[3]}} </p>
     <p> Minimum temperature: {{WeeklyMinTemp[3]}}&#176; C </p>
     <p> Maximum temperature: {{WeeklyMaxTemp[3]}}&#176; C </p>
     <br>
-    <p> Weekly sol: {{WeeklySols[4]}} </p>
+    <strong> Sol: {{WeeklySols[4]}} </strong>
     <p> Date: {{WeeklyDays[4]}} </p>
     <p> Minimum temperature: {{WeeklyMinTemp[4]}}&#176; C </p>
     <p> Maximum temperature: {{WeeklyMaxTemp[4]}}&#176; C </p>
     <br>
-    <p> Weekly sol: {{WeeklySols[5]}} </p>
+    <strong> Sol: {{WeeklySols[5]}} </strong>
     <p> Date: {{WeeklyDays[5]}} </p>
     <p> Minimum temperature: {{WeeklyMinTemp[5]}}&#176; C </p>
     <p> Maximum temperature: {{WeeklyMaxTemp[5]}}&#176; C </p>
     <br>
-    <p> Weekly sol: {{WeeklySols[6]}} </p>
+    <strong> Sol: {{WeeklySols[6]}} </strong>
     <p> Date: {{WeeklyDays[6]}} </p>
     <p> Minimum temperature: {{WeeklyMinTemp[6]}}&#176; C </p>
     <p> Maximum temperature: {{WeeklyMaxTemp[6]}}&#176; C </p>
     </div>
     <br>
-    <p> Weekly average minimum temperature: {{averageMin}}&#176; C </p>
-    <p> Weekly average maximum temperature: {{averageMax}}&#176; C </p>
+    <strong> Weekly average minimum temperature: {{averageMin}}&#176; C </strong>
+    <br>
+    <strong> Weekly average maximum temperature: {{averageMax}}&#176; C </strong>
 
     <div class="card-body" style="position: relative;">
       <MarsChart :dates="WeeklyDays" :mintemp="WeeklyMinTemp" :maxtemp="WeeklyMaxTemp"/>
@@ -86,11 +87,6 @@ export default {
       const response = await axios.get(
         `https://api.maas2.apollorion.com/`
       );
-      // for Weekly days
-      // const response = await axios.get(
-      //   `https://api.maas2.apollorion.com/${sol}`
-      // );
-      // can get sunrise and sunset
       this.latestSol = response.data.sol;
       this.latestDate = response.data.terrestrial_date.substring(0,10);
       this.latestMinTemp = response.data.min_temp;
@@ -128,7 +124,6 @@ export default {
         `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=${this.latestDate}&api_key=${this.apiKey}`
       );
       // maybe change to get random photo from date
-      console.log(response.data.photos[0].img_src);
       this.marsPhoto = response.data.photos[0].img_src;
     }
   }

@@ -1,5 +1,4 @@
 <template>
-    <!-- <iframe src='https://mars.nasa.gov/layout/embed/image/mslweather/' width='700' height='600'  scrolling='no' frameborder='0'></iframe> -->
     <div class="card-header">
     <h2>Mars Weather</h2>
   </div>
