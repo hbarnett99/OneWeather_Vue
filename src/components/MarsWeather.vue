@@ -2,7 +2,7 @@
     <h6>Weather measured by the Curosity Rover on Mars </h6>
     <p> The weather is updated once each week with the data for the previous 7 days </p>
     <br>
-    <img :src="`${this.marsPhoto}`" width='650' height='350'  scrolling='no' frameborder='0'>
+    <img :src="`${this.marsPhoto}`" scrolling='no' frameborder='0' alt="image of Mars taken by the curosity rover">
     <br>
     <br>
     <h3> Past 7 days </h3>
@@ -124,7 +124,7 @@ export default {
         `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=${this.latestDate}&api_key=${this.apiKey}`
       );
       // maybe change to get random photo from date
-      this.marsPhoto = response.data.photos[0].img_src;
+      this.marsPhoto = response.data.photos[8].img_src;
     }
   }
 };
@@ -133,3 +133,14 @@ export default {
 
 
 </script>
+
+<style scoped>
+img{
+  max-width: 100%;
+  border-radius: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+</style>

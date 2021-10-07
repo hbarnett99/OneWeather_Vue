@@ -32,7 +32,7 @@
             </li>
 
             <li class="sidebar-item">
-              <router-link to="/Mars" class="sidebar-link">
+              <router-link to="/Mars" class="sidebar-link" @click="hideMenuOnRoute">
                 <i class="bi bi-grid-fill"></i>
                 <span>Mars</span>
               </router-link>
