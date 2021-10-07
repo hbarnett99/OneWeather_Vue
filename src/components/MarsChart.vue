@@ -37,7 +37,7 @@ export default {
           enabled: true,
         },
         title: {
-          text: 'Previous temperature'
+          text: 'Temperature for the past 7 days'
         }
       },
       series: [{
