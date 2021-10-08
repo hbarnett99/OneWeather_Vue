@@ -190,20 +190,7 @@
                       <h6 class="text-muted mb-0">subtext</h6>
                     </div>
                   </div>
-                  <div class="recent-message d-flex px-4 py-3">
-
-                    <div class="name ms-4">
-                      <h5 class="mb-1">Placeholder 2</h5>
-                      <h6 class="text-muted mb-0">subtext</h6>
-                    </div>
-                  </div>
-                  <div class="recent-message d-flex px-4 py-3">
-
-                    <div class="name ms-4">
-                      <h5 class="mb-1">Placeholder 3</h5>
-                      <h6 class="text-muted mb-0">Subtext</h6>
-                    </div>
-                  </div>
+                  <Items :locations = "locations" />
 
                 </div>
               </div>
@@ -227,9 +214,37 @@
 </template>
 
 <script>
+import Items from './components/FavouriteItems.vue';
 
 export default {
   name: 'App',
+  components: {
+    Items,
+  },
+  data() {
+    return {
+        locations: []
+      };
+  },
+  created() {
+    this.locations = [
+      {
+        name: 'Melbourne',
+        region: 'Victoria',
+        country: 'Australia'
+      },
+      {
+        name: 'Clayton North',
+        region: 'Victoria',
+        country: 'Australia'
+      },
+      {
+        name: 'Glen Waveley',
+        region: 'Victoria',
+        country: 'Australia'
+      }
+    ];
+  },
   methods: {
     // Used to show/hide the sidebar if the screensize does not auto-include it
     menuToggle(){
