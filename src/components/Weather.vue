@@ -3,7 +3,7 @@
     <header class="col">
       <h4> Location: {{ data?.location?.name }} </h4>
     </header>
-    <button @click="addFavourite()" class="btn btn-outline-warning col-auto mx-3 mb-3 mt-0">
+    <button @click="$emit('add-favourite', data.location)" class="btn btn-outline-warning col-auto mx-3 mb-3 mt-0">
       Favourite
     </button>
     <hr/>
@@ -44,12 +44,7 @@ export default {
     this.temp2 = (parseInt(this.data?.forecast?.forecastday[0]?.day?.maxtemp_c) - parseInt(this.data_yesterday?.forecast?.forecastday[0]?.day?.maxtemp_c)).toString();
     console.log(this.temp1);
     console.log(this.temp2);
-  },
-  methods: {
-    addFavourite(){
-      console.log(this.data.location.name, this.data.location.country, this.data.location.region);
-    }
-  },
+  }
 };
 
 </script>

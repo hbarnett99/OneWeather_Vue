@@ -8,7 +8,7 @@
   </div>
   <div v-if="data?.location?.name != null">
     <div class="card-body" style="position: relative;">
-      <Weather :data="data" :data_lastweek="data_lastweek" :data_yesterday="data_yesterday"/>
+      <Weather @add-favourite="$emit('add-favourite', data.location)" :data="data" :data_lastweek="data_lastweek" :data_yesterday="data_yesterday"/>
     </div>
     <div class="card-body" style="position: relative;">
       <DemoChart :dates="dates" :temps="temps" :precipitation="precipitation"/>
@@ -97,7 +97,8 @@ export default {
           });
       }
     },
-  }
+  },
+  emits: ['add-favourite']
 };
 </script>
 

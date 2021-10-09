@@ -156,7 +156,7 @@
 
                 <div class="col-12">
                   <div class="card">
-                    <router-view/>
+                    <router-view @add-favourite="addFavourite"/>
                   </div>
                 </div>
 
@@ -219,25 +219,6 @@ export default {
         locations: []
       };
   },
-  created() {
-    this.locations = [
-      {
-        name: 'Melbourne',
-        region: 'Victoria',
-        country: 'Australia'
-      },
-      {
-        name: 'Glen Waveley',
-        region: 'Victoria',
-        country: 'Australia'
-      },
-      {
-        name: 'Clayton North',
-        region: 'Victoria',
-        country: 'Australia'
-      }
-    ];
-  },
   methods: {
     // Used to show/hide the sidebar if the screensize does not auto-include it
     menuToggle(){
@@ -269,7 +250,12 @@ export default {
 
     },
     deleteItem(name){
-      this.locations = this.locations.filter((location) => location.name !== name);
+      if (confirm('Are you sure to delete this location?')){
+        this.locations = this.locations.filter((location) => location.name !== name);
+      }
+    },
+    addFavourite(location){
+      this.locations.push(location);
     }
   }
 };
