@@ -255,7 +255,15 @@ export default {
       }
     },
     addFavourite(location){
-      this.locations.push(location);
+      var duplication = false;
+      this.locations.forEach((loc) => {
+        if (loc.name === location.name){
+          duplication = true;
+        }
+      });
+      if (!duplication){
+        this.locations.push(location);
+      }
     }
   }
 };
