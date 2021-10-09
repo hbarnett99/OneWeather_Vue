@@ -37,7 +37,7 @@ export default {
           enabled: true,
         },
         title: {
-          text: 'Temperature for the past 7 days'
+          text: 'Temperature for the past 31 days'
         }
       },
       series: [{
@@ -71,6 +71,7 @@ export default {
           categories: this.dates
         }
       };
+      console.log("this.dates");
     }
   }
 };

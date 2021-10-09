@@ -1,54 +1,27 @@
 <template>
     <h6>Weather measured by the Curosity Rover on Mars </h6>
-    <p> The weather is updated once each week with the data for the previous 7 days </p>
+    <p> The weather is updated once each month with the data for the previous 31 days </p>
     <br>
     <img :src="`${this.marsPhoto}`" scrolling='no' frameborder='0' alt="image of Mars taken by the curosity rover">
     <br>
     <br>
-    <h3> Past 7 days </h3>
+    <h3> Past 31 days </h3>
       <div style="height:350px;overflow:auto">
-    <strong> Sol: {{WeeklySols[0]}} </strong>
-    <p> Date: {{WeeklyDays[0]}} </p>
-    <p> Minimum temperature: {{WeeklyMinTemp[0]}}&#176; C </p>
-    <p> Maximum temperature: {{WeeklyMaxTemp[0]}}&#176; C </p>
-    <br>
-    <strong> Sol: {{WeeklySols[1]}} </strong>
-    <p> Date: {{WeeklyDays[1]}} </p>
-    <p> Minimum temperature: {{WeeklyMinTemp[1]}}&#176; C </p>
-    <p> Maximum temperature: {{WeeklyMaxTemp[1]}}&#176; C </p>
-    <br>
-    <strong> Sol: {{WeeklySols[2]}} </strong>
-    <p> Date: {{WeeklyDays[2]}} </p>
-    <p> Weekly  in temp: {{WeeklyMinTemp[2]}}&#176; C </p>
-    <p> Maximum temperature: {{WeeklyMaxTemp[2]}}&#176; C </p>
-    <br>
-    <strong> Sol: {{WeeklySols[3]}} </strong>
-    <p> Date: {{WeeklyDays[3]}} </p>
-    <p> Minimum temperature: {{WeeklyMinTemp[3]}}&#176; C </p>
-    <p> Maximum temperature: {{WeeklyMaxTemp[3]}}&#176; C </p>
-    <br>
-    <strong> Sol: {{WeeklySols[4]}} </strong>
-    <p> Date: {{WeeklyDays[4]}} </p>
-    <p> Minimum temperature: {{WeeklyMinTemp[4]}}&#176; C </p>
-    <p> Maximum temperature: {{WeeklyMaxTemp[4]}}&#176; C </p>
-    <br>
-    <strong> Sol: {{WeeklySols[5]}} </strong>
-    <p> Date: {{WeeklyDays[5]}} </p>
-    <p> Minimum temperature: {{WeeklyMinTemp[5]}}&#176; C </p>
-    <p> Maximum temperature: {{WeeklyMaxTemp[5]}}&#176; C </p>
-    <br>
-    <strong> Sol: {{WeeklySols[6]}} </strong>
-    <p> Date: {{WeeklyDays[6]}} </p>
-    <p> Minimum temperature: {{WeeklyMinTemp[6]}}&#176; C </p>
-    <p> Maximum temperature: {{WeeklyMaxTemp[6]}}&#176; C </p>
+        <!-- <p> {{weatherData}} </p> -->
+            <div v-for="day in weather"  :key="day">
+             <strong> Sol: {{day.sol}} </strong>
+             <p> Date: {{day.date}} </p>
+             <p> Minimum temperature: {{day.minTemp}}&#176; C </p>
+             <p> Maximum temperature: {{day.maxTemp}}&#176; C </p>
+             <br>
+           </div>
     </div>
     <br>
     <strong> Weekly average minimum temperature: {{averageMin}}&#176; C </strong>
     <br>
     <strong> Weekly average maximum temperature: {{averageMax}}&#176; C </strong>
-
     <div class="card-body" style="position: relative;">
-      <MarsChart :dates="WeeklyDays" :mintemp="WeeklyMinTemp" :maxtemp="WeeklyMaxTemp"/>
+      <MarsChart :dates="dates" :mintemp="minTemps" :maxtemp="maxTemps"/>
     </div>
 
 </template>
@@ -65,17 +38,14 @@ export default {
   data() {
     return {
       apiKey: 'Hwaa1ehssKfFrLR2UKZbKxgm0vvPSXbg8ZvHSmf5',
+      dates: [""],
+      minTemps: [],
+      maxTemps: [],
       latestSol: "",
-      latestDate: "",
-      latestMinTemp: "",
-      latestMaxTemp: "",
-      WeeklySols: [],
-      WeeklyDays: [],
-      WeeklyMinTemp: [],
-      WeeklyMaxTemp: [],
       averageMin: 0,
       averageMax: 0,
-      marsPhoto: ""
+      marsPhoto: "",
+      weather: []
     };
   },
   created(){
@@ -88,40 +58,40 @@ export default {
         `https://api.maas2.apollorion.com/`
       );
       this.latestSol = response.data.sol;
-      this.latestDate = response.data.terrestrial_date.substring(0,10);
-      this.latestMinTemp = response.data.min_temp;
-      this.latestMaxTemp = response.data.max_temp;
-      this.getPhoto();
       this.getPastWeather();
     },
     async getPastWeather(){
-      this.WeeklySols.push(this.latestSol);
-      this.WeeklyDays.push(this.latestDate);
-      this.WeeklyMinTemp.push(this.latestMinTemp);
-      this.WeeklyMaxTemp.push(this.latestMaxTemp);
-      for(let i = 1; i < 7; i++){
-        this.WeeklySols.push(this.latestSol - i);
+      var sol = this.latestSol;
+      for(let i = 0; i < 30; i++){
+        // this.WeeklySols.push(this.latestSol - i);
         // for Weekly days
         const response = await axios.get(
-          `https://api.maas2.apollorion.com/${this.latestSol - i}`
+          `https://api.maas2.apollorion.com/${sol}`
         );
-        this.WeeklyDays.push(response.data.terrestrial_date.substring(0,10));
-        this.WeeklyMinTemp.push(response.data.min_temp);
-        this.WeeklyMaxTemp.push(response.data.max_temp);  
+        sol = sol - 1;
+        this.dates.push(response.data.terrestrial_date.substring(0,10));
+        this.minTemps.push(response.data.min_temp);
+        this.maxTemps.push(response.data.max_temp);
+        this.weather[i] = {sol: response.data.sol, 
+          date: response.data.terrestrial_date.substring(0,10), 
+          minTemp: response.data.min_temp, 
+          maxTemp: response.data.max_temp};
+ 
       }
+      this.getPhoto();
       this.getAverage();
     },
     getAverage(){
-      for (let i=0; i < 7;  i++){
-        this.averageMin =  this.averageMin + this.WeeklyMinTemp[i];
-        this.averageMax =  this.averageMax + this.WeeklyMaxTemp[i];
+      for (let i=0; i < 30;  i++){
+        this.averageMin =  this.averageMin + this.weather[i].minTemp;
+        this.averageMax =  this.averageMax + this.weather[i].maxTemp;
       }
-      this.averageMin = (this.averageMin/7).toFixed(2);
-      this.averageMax = (this.averageMax/7).toFixed(2);
+      this.averageMin = (this.averageMin/31).toFixed(2);
+      this.averageMax = (this.averageMax/31).toFixed(2);
     },
     async getPhoto(){
       const response = await axios.get(
-        `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=${this.latestDate}&api_key=${this.apiKey}`
+        `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=${this.weather[0].date}&api_key=${this.apiKey}`
       );
       // maybe change to get random photo from date
       this.marsPhoto = response.data.photos[8].img_src;
