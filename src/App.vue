@@ -182,16 +182,9 @@
                 <div class="card-header">
                   <h4>Favourites</h4>
                 </div>
+                <!-- The favourite list is here -->
                 <div class="card-content pb-4">
-                  <div class="recent-message d-flex px-4 py-3">
-
-                    <div class="name ms-4">
-                      <h5 class="mb-1">Placeholder 1</h5>
-                      <h6 class="text-muted mb-0">subtext</h6>
-                    </div>
-                  </div>
-                  <Items :locations = "locations" />
-
+                  <Items @delete-item="deleteItem" :locations = "locations" />
                 </div>
               </div>
 
@@ -234,12 +227,12 @@ export default {
         country: 'Australia'
       },
       {
-        name: 'Clayton North',
+        name: 'Glen Waveley',
         region: 'Victoria',
         country: 'Australia'
       },
       {
-        name: 'Glen Waveley',
+        name: 'Clayton North',
         region: 'Victoria',
         country: 'Australia'
       }
@@ -274,6 +267,9 @@ export default {
     },
     sidebarShow(){
 
+    },
+    deleteItem(name){
+      this.locations = this.locations.filter((location) => location.name !== name);
     }
   }
 };

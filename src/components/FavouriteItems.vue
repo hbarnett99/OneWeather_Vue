@@ -1,7 +1,7 @@
 <template>
     <div :key="location.name" v-for="location in locations">
         <!--<Item :item="item" /> -->
-        <Item :location = "location"/>
+        <Item @delete-item="$emit('delete-item', location.name)" :location = "location"/>
     </div>
 </template>
 
@@ -14,6 +14,7 @@ export default {
     },
     components: {
         Item
-    }
+    },
+    emits: ['delete-item']
 };
 </script>

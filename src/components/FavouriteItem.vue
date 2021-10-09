@@ -1,10 +1,11 @@
 <template>
-    <div class="recent-message d-flex px-4 py-3">
-        <div class="name ms-4">
-            <h5 class="mb-1">{{ location.name }}</h5>
-            <h6 class="text-muted mb-0">Region: {{ location.region }}</h6>
-            <h6 class="text-muted mb-0">Country: {{ location.country }}</h6>
-        </div>
+    <div class="item">
+        <h5>
+            {{ location.name }}
+            <i @click="$emit('delete-item', location.name)" class="fas fa-times"></i>
+        </h5>
+        <h6>Region: {{ location.region }}</h6>
+        <h6>Country: {{ location.country }}</h6>
     </div>
 </template>
 
@@ -13,6 +14,24 @@ export default {
     name: "Item",
     props: {
         location: Object
-    },
+    }
 };
 </script>
+
+<style scoped>
+.fas {
+    color: red;
+}
+.item {
+    background: #f4f4f4;
+    margin: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 15px;
+}
+.item h5  {
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+}
+</style>
