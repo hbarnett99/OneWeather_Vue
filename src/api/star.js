@@ -1,0 +1,92 @@
+/**
+ * Standardised name for star
+ *
+ * @param {{name:string, designations:string}} star Star
+ * @returns Name
+ */
+export const starName = ({ name, designations }) => name + (designations ?? "");
+
+/**
+ * Calculate visibility of a star considering weather
+ *
+ * @param {{ambientLum:number, illumination:number, vmag:number, "above-horizon":boolean}} star Star
+ * @param {object} weather Weather object
+ * @returns Visibility as a percentage
+ */
+export const calculateVisibility = (star, weather) => {
+  const { ambientLum, illumination, vmag } = star;
+
+  // Cannot see star if it is below horizon
+  if (!star["above-horizon"]) {
+    return "-";
+  }
+
+  // Multiplier applied for brightness
+  const brightness = ((illumination ?? 100) / 100) * magnitudeMultiplier(vmag);
+
+  // Ambient light reduces visibility
+  const ambient = ambientMultiplier(ambientLum);
+
+  const visibility = ambient * brightness * (1 - calculateBlockage(weather));
+
+  return visibility.toFixed(2);
+};
+
+/**
+ * Calculate visibility multiplier from ambient luminosity
+ *
+ * @param {number} amb Ambient luminosity
+ * @returns Multiplier
+ */
+const ambientMultiplier = (amb) => {
+  if (amb > 50) return 1; // TODO: Return 0 when done testing
+  return Math.min(1, 1 / amb);
+};
+
+/**
+ * Calculate visibility multiplier from magnitude
+ *
+ * @param {number} vmag Visibility magnitude
+ * @returns Multiplier
+ */
+const magnitudeMultiplier = (vmag) => {
+  if (vmag <= -1) return 100;
+  if (vmag > 6.5) return 0;
+  return 100 / (vmag + 2);
+};
+
+/**
+ * Calculate proportion of visibility decrease due to weather
+ *
+ * @param {object} weather Weather object
+ * @returns Multiplier for blockage
+ */
+const calculateBlockage = (weather) => {
+  // Don't calculate without weather information
+  if (!weather) {
+    return 0;
+  }
+
+  const isDay = !!weather.is_day;
+
+  // Assume we can't see stars during day
+  if (isDay) {
+    // return 0;
+  }
+
+  const { will_it_rain, chance_of_rain, chance_of_snow, cloud } =
+    weather.condition;
+
+  // Chance of it raining or snowing
+  const snowProb = chance_of_snow / 100,
+    rainProb = chance_of_rain / 100,
+    noSnowProb = 1 - snowProb,
+    noRainProb = 1 - rainProb,
+    rainSnowProb = snowProb * noRainProb + rainProb * noSnowProb,
+    chanceOfVisibility = 1 - (will_it_rain || rainSnowProb);
+
+  // Blocking view due to clouds
+  const cloudBlock = cloud > 25 ? 1 : cloud / 25;
+
+  return cloudBlock * chanceOfVisibility;
+};
