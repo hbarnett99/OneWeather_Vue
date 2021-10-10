@@ -30,6 +30,9 @@ import mapboxgl from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 export default {
+  props: {
+    favCoords: Array
+  },
   data() {
     return {
       location: "",
@@ -117,7 +120,15 @@ export default {
 
     }
   },
-  emits: ['coords-fetch']
+  emits: ['coords-fetch'],
+  watch: {
+    favCoords(){
+      this.coordinates[0] = this.favCoords[0];
+      this.coordinates[1] = this.favCoords[1];
+      console.log('Search', this.coordinates);
+      this.addMarkers();
+    }
+  }
 };
 
 

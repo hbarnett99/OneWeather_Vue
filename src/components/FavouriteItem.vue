@@ -1,5 +1,5 @@
 <template>
-    <div class="item">
+    <div @dblclick="$emit('search-fav', [location.lon, location.lat])" class="item">
         <h5>
             {{ location.name }}
             <i @click="$emit('delete-item', location.name)" class="fas fa-times"></i>

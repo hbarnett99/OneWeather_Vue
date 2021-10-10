@@ -156,7 +156,7 @@
 
                 <div class="col-12">
                   <div class="card">
-                    <router-view @add-favourite="addFavourite"/>
+                    <router-view @add-favourite="addFavourite" :coords="coords"/>
                   </div>
                 </div>
 
@@ -180,11 +180,13 @@
               </div>
               <div class="card">
                 <div class="card-header">
-                  <h4>Favourites</h4>
+                  <h4>Favourites
+                    <button @click="sort" class="location-btn btn btn-outline-secondary btn-sm mx-2 col-auto">Sort</button>
+                  </h4>
                 </div>
                 <!-- The favourite list is here -->
                 <div class="card-content pb-4">
-                  <Items @delete-item="deleteItem" :locations = "locations" />
+                  <Items @search-fav="searchfav" @delete-item="deleteItem" :locations = "locations" />
                 </div>
               </div>
 
@@ -216,7 +218,8 @@ export default {
   },
   data() {
     return {
-        locations: []
+        locations: [],
+        coords: []
       };
   },
   methods: {
@@ -264,6 +267,16 @@ export default {
       if (!duplication){
         this.locations.push(location);
       }
+    },
+    sort(){
+      this.locations.sort((a,b) => a.name.localeCompare(b.name));
+    },
+    searchfav([lon, lat]){
+      if (this.coords[0] !== lon && this.coords[1] !== lat){
+        this.coords = [lon, lat];
+      }
+        else {console.log();}
+      
     }
   }
 };

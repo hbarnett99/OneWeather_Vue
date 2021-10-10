@@ -4,7 +4,7 @@
     <h2>Weather</h2>
   </div>
   <div class="card-body" style="position: relative;">
-    <SearchCoords @coords-fetch="handleCoords" />
+    <SearchCoords @coords-fetch="handleCoords" :favCoords = "favCoords" />
   </div>
   <div v-if="data?.location?.name != null">
     <div class="card-body" style="position: relative;">
@@ -26,6 +26,9 @@ import axios from 'axios';
 
 export default {
   name: 'App',
+  props: {
+    coords: Array
+  },
   components: {
     SearchCoords,
     Weather,
@@ -38,8 +41,16 @@ export default {
       data_yesterday: {},
       dates: [],
       temps: [],
-      precipitation: []
+      precipitation: [],
+      favCoords: []
     };
+  },
+  watch: {
+    coords(){
+      console.log('Home', this.coords);
+      this.handleCoords([this.coords[0], this.coords[1]]);
+      this.favCoords = [this.coords[0], this.coords[1]];
+    }
   },
   methods: {
     handleCoords([lng, lat]) {
