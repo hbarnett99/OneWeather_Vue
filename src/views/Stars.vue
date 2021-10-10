@@ -16,8 +16,8 @@ import axios from "axios";
 import StarWatch from "@/components/StarWatch";
 import StarsAvailable from "@/components/StarsAvailable";
 
-import { starName } from "../util/star";
-import { currentDate } from "../util/date";
+import { starName } from "../api/star";
+import { currentDate } from "../api/date";
 
 const STAR_WATCH_KEY = "star-watch";
 

@@ -1,6 +1,7 @@
 <template>
   <div>
     <h5>Stars Available</h5>
+    <button @click="sortName">Name</button><button @click="sortVis">Visibility</button>
     <div style="height:200px;overflow:auto">
       <table :key="starName(star)" v-for="star in stars">
         <td >
@@ -15,7 +16,7 @@
 <script>
 import Star from './Star.vue';
 import Button from "./Button.vue";
-import { starName } from "../util/star.js";
+import { starName, compareName, compareName_, compareVis, compareVis_ } from "../api/star.js";
 
 const STELLAR_URL = "http://localhost:8090/api/objects";
 
@@ -36,7 +37,9 @@ export default {
   },
   data() {
     return {
-      stars: []
+      stars: [],
+      nameAsc: false,
+      visAsc: false,
     };
   },
   async created() {
@@ -64,6 +67,14 @@ export default {
     starName,
     onClick(name) {
       this.$emit('added', this.stars.find((star) => name === starName(star)));
+    },
+    sortName() {
+      this.stars = this.stars.sort(this.nameAsc ? compareName : compareName_);
+      this.nameAsc = !this.nameAsc;
+    },
+    sortVis() {
+      this.stars = this.stars.sort(this.visAsc ? compareVis(this.weather) : compareVis_(this.weather));
+      this.visAsc = !this.visAsc;
     }
   },
   emits: ["added"]

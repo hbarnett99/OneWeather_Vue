@@ -90,3 +90,50 @@ const calculateBlockage = (weather) => {
 
   return cloudBlock * chanceOfVisibility;
 };
+
+/**
+ * Compares stars by name
+ *
+ * @param {object} s1 Star
+ * @param {object} s2 Star
+ * @returns Comparison
+ */
+export const compareName = (s1, s2) => {
+  const n1 = starName(s1);
+  const n2 = starName(s2);
+  if (n1 < n2) return -1;
+  if (n1 > n2) return 1;
+  return 0;
+};
+
+/**
+ * Compares stars by name. Reverse of compareName
+ *
+ * @param {object} s1 Star
+ * @param {object} s2 Star
+ * @returns Comparison
+ */
+export const compareName_ = (s1, s2) => -compareName(s1, s2);
+
+/**
+ * Returns a comparison function for stars, comparing on visibility
+ *
+ * @param {object} weather Weather
+ * @returns Comparison function
+ */
+export const compareVis = (weather) => (s1, s2) => {
+  const v1 = calculateVisibility(s1, weather);
+  const v2 = calculateVisibility(s2, weather);
+  const n1 = v1 === "-" ? -1 : Number(v1);
+  const n2 = v2 === "-" ? -1 : Number(v2);
+  return n1 - n2;
+};
+
+/**
+ * Returns a comparison function for stars, comparing on visibility. Reverse of compareVis
+ *
+ * @param {object} weather Weather
+ * @returns Comparison function
+ */
+export const compareVis_ = (weather) => (s1, s2) =>
+  -compareVis(weather)(s1, s2);
