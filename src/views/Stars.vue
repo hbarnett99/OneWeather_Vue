@@ -4,8 +4,14 @@
     <h2>Stars</h2>
   </div>
   <div class="card-body" style="position: relative;">
-    <StarWatch @removed="removeStar" :stars="stars" :weather="weather" />
-    <StarsAvailable @added="addStar" :weather="weather" />
+    <div>
+      <h5>Watched stars</h5>
+      <StarList @btn-click="removeStar" :stars="stars_" :weather="weather" text="Remove" />
+    </div>
+    <div>
+      <h5>Available stars</h5>
+      <StarList @btn-click="addStar" :stars="stars"  :weather="weather" text="Add" />
+    </div>
   </div>
 
 </template>
@@ -13,30 +19,38 @@
 <script>
 import axios from "axios";
 
-import StarWatch from "@/components/StarWatch";
-import StarsAvailable from "@/components/StarsAvailable";
+import StarList from "@/components/StarList";
 
-import { starName } from "../api/star";
+import { starName, fetchStellar, fetchPlanetNames, fetchStarNames } from "../api/star";
 import { currentDate } from "../api/date";
 
 const STAR_WATCH_KEY = "star-watch";
 
-const set = (stars) => window.localStorage.setItem(STAR_WATCH_KEY, JSON.stringify(stars));
+/**
+ * Set names of stars in localStorage
+ *
+ * @param {object[]} stars Stars
+ * @returns void
+ */
+const set = (stars) =>
+  window.localStorage.setItem(STAR_WATCH_KEY, JSON.stringify(stars.map(starName)));
 
 export default {
-  name: "Star Watch",
+  name: "Stars",
 
   components: {
-    StarWatch,
-    StarsAvailable
+    StarList
   },
 
   data() {
     // Retrieve stars from storage
-    const stars = JSON.parse(window.localStorage.getItem(STAR_WATCH_KEY) ?? "[]");
+    /** @type {string[]} */
+    const names = JSON.parse(window.localStorage.getItem(STAR_WATCH_KEY) ?? "[]");
 
     return {
-      stars,
+      names,
+      stars: [],
+      stars_: [],
       weather: null
     };
   },
@@ -47,22 +61,32 @@ export default {
     const hourWeather = res.data.forecast.forecastday[0].hour;
 
     this.weather = hourWeather.find(({ time_epoch }) => Math.abs(time_epoch - Date.now()) < 3600);
+
+    // Fetch stars
+    const names = [...await fetchPlanetNames(),  ...await fetchStarNames()];
+    for (const name of names) {
+      const stellar = await fetchStellar(name);
+      this.stars = [...this.stars, stellar];
+
+      // Check watched
+      if (this.names.includes(name)) {
+        this.stars_ = [...this.stars_, stellar];
+      }
+    };
   },
 
   methods: {
     addStar(star) {
-      console.log(star, this.stars);
-
       // Don't add duplicates
-      if (!this.stars.find(({ name }) => name === starName(star))) {
-        this.stars = [...this.stars, star];
-        set(this.stars);
+      if (!this.stars_.find(({ name }) => name === starName(star))) {
+        this.stars_ = [...this.stars_, star];
+        set(this.stars_);
       }
     },
-    removeStar(n) {
+    removeStar(star) {
       // Remove star with name n
-      this.stars = this.stars.filter((star) => n != starName(star));
-      set(this.stars);
+      this.stars_ = this.stars_.filter((s) => starName(star) != starName(s));
+      set(this.stars_);
     }
   }
 };

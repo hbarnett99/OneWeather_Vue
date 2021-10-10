@@ -1,3 +1,5 @@
+export const STELLAR_URL = "http://localhost:8090/api/objects";
+
 /**
  * Standardised name for star
  *
@@ -5,6 +7,46 @@
  * @returns Name
  */
 export const starName = ({ name, designations }) => name + (designations ?? "");
+
+/**
+ * Fetch a stellar object
+ *
+ * @param {string} name Name of stellar object
+ * @returns {Promise<object>} Stellar object
+ */
+export async function fetchStellar(name) {
+  const res = await fetch(`${STELLAR_URL}/info?format=json&name=${name}`);
+  return res.json();
+}
+
+/**
+ * Fetch objects of a type
+ *
+ * @param {string} type Type of objects
+ * @returns {Promise<string[]>} Name of objects
+ */
+export async function fetchObjectNames(type) {
+  const res = await fetch(`${STELLAR_URL}/listobjectsbytype?type=${type}`);
+  return res.json();
+}
+
+/**
+ * Fetch planets
+ *
+ * @returns {Promise<string[]>} Name of planets
+ */
+export async function fetchPlanetNames() {
+  return fetchObjectNames("SolarSystem:planet");
+}
+
+/**
+ * Fetch stars
+ *
+ * @returns {Promise<string[]>} Name of stars
+ */
+export async function fetchStarNames() {
+  return fetchObjectNames("StarMgr");
+}
 
 /**
  * Calculate visibility of a star considering weather

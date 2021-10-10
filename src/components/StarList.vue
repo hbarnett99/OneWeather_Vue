@@ -1,12 +1,11 @@
 <template>
   <div>
-    <h5>Watched stars</h5>
     <button @click="sortName">Name</button><button @click="sortVis">Visibility</button>
     <div style="height:200px;overflow:auto">
       <table :key="starName(star)" v-for="star in stars_">
         <td >
           <Star :star="star" :weather="weather" />
-          <Button text="Remove" :id="starName(star)" @btn-click="onClick" />
+          <Button :text="text" :id="starName(star)" @btn-click="onClick" />
         </td>
       </table>
     </div>
@@ -20,27 +19,28 @@ import Button from "./Button.vue";
 import { starName, compareName, compareName_, compareVis, compareVis_ } from "../api/star.js";
 
 export default {
-  name: 'StarWatch',
+  name: 'StarList',
   props: {
     stars: Array,
-    weather: Object
+    weather: Object,
+    text: String
   },
   data() {
     return {
-      stars_: Array
+      stars_: this.stars
     };
   },
   components: {
     Star,
     Button
   },
-  created() {
-    this.stars_ = this.stars;
+  watch: {
+    stars() { this.stars_ = this.stars; }
   },
   methods: {
     starName,
     onClick(name) {
-      this.$emit('removed', this.stars.find((star) => name === starName(star)));
+      this.$emit('btn-click', this.stars.find((star) => name === starName(star)));
     },
     sortName() {
       this.stars_ = this.stars_.sort(this.nameAsc ? compareName : compareName_);
@@ -51,6 +51,6 @@ export default {
       this.visAsc = !this.visAsc;
     }
   },
-  emits: ["removed"]
+  emits: ["btn-click"]
 };
 </script>
