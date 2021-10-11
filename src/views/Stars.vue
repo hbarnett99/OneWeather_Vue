@@ -21,7 +21,7 @@ import axios from "axios";
 
 import StarList from "@/components/StarList";
 
-import { starName, fetchStellar, fetchPlanetNames, fetchStarNames } from "../api/star";
+import { starName, fetchStellar, fetchPlanetNames, fetchStarNames, moveLocation } from "../api/star";
 import { currentDate } from "../api/date";
 
 const STAR_WATCH_KEY = "star-watch";
@@ -37,6 +37,11 @@ const set = (stars) =>
 
 export default {
   name: "Stars",
+
+  props: {
+    latitude: Number,
+    longitude: Number,
+  },
 
   components: {
     StarList
@@ -56,11 +61,18 @@ export default {
   },
 
   async created() {
+    // Default to Monash University Clayton
+    const lat = this.latitude ?? -37.914;
+    const long = this.longitude ?? 145.132;
+
     // Weather at the current time
-    const res = await axios.get(`http://api.weatherapi.com/v1/history.json?key=721ef4891d454f2385304513211009&q=-37.91063,145.13360699999998&dt=` + currentDate());
+    const res = await axios.get(`http://api.weatherapi.com/v1/history.json?key=721ef4891d454f2385304513211009&q=${lat},${long}&dt=` + currentDate());
     const hourWeather = res.data.forecast.forecastday[0].hour;
 
     this.weather = hourWeather.find(({ time_epoch }) => Math.abs(time_epoch - Date.now()) < 3600);
+
+    // Move to location
+    await moveLocation(lat, long);
 
     // Fetch star names
     const planets = (await fetchPlanetNames()).filter((s) => s != "Earth");
@@ -80,6 +92,7 @@ export default {
   },
 
   methods: {
+    moveLocation,
     addStar(star) {
       // Don't add duplicates
       if (!this.stars_.find(({ name }) => name === starName(star))) {

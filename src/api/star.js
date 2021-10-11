@@ -1,4 +1,19 @@
-export const STELLAR_URL = "http://localhost:8090/api/objects";
+import axios from "axios";
+
+export const STELLAR_URL = "http://localhost:8090/api";
+
+/**
+ * Move the stellar map to a location
+ *
+ * @param {number} lat Latitude
+ * @param {number} long Longitude
+ * @returns Response from POST request
+ */
+export const moveLocation = (lat, long) =>
+  axios.post(
+    `${STELLAR_URL}/location/setlocationfields`,
+    `latitude=${lat}&longitude=${long}`
+  );
 
 /**
  * Standardised name for star
@@ -17,7 +32,9 @@ export const starName = (star) =>
  * @returns {Promise<object>} Stellar object
  */
 export async function fetchStellar(name) {
-  const res = await fetch(`${STELLAR_URL}/info?format=json&name=${name}`);
+  const res = await fetch(
+    `${STELLAR_URL}/objects/info?format=json&name=${name}`
+  );
   return res.json();
 }
 
@@ -28,7 +45,9 @@ export async function fetchStellar(name) {
  * @returns {Promise<string[]>} Name of objects
  */
 export async function fetchObjectNames(type) {
-  const res = await fetch(`${STELLAR_URL}/listobjectsbytype?type=${type}`);
+  const res = await fetch(
+    `${STELLAR_URL}/objects/listobjectsbytype?type=${type}`
+  );
   return res.json();
 }
 
