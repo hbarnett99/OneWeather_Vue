@@ -1,11 +1,11 @@
 <template>
   <span>
-    Name: {{ star.name || star.designations }}, Visibility ({{ calculateVisibility(star) }} %)
+    Name: {{ starName(star) }}, Visibility ({{ calculateVisibility(star) }} %)
   </span>
 </template>
 
 <script>
-import { calculateVisibility } from "../api/star";
+import { calculateVisibility, starName } from "../api/star";
 
 export default {
   props: {
@@ -13,7 +13,8 @@ export default {
     weather: Object,
   },
   methods: {
-    calculateVisibility
+    calculateVisibility,
+    starName
   },
 };
 </script>

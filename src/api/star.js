@@ -6,7 +6,9 @@ export const STELLAR_URL = "http://localhost:8090/api/objects";
  * @param {{name:string, designations:string}} star Star
  * @returns Name
  */
-export const starName = ({ name, designations }) => name + (designations ?? "");
+export const starName = (star) =>
+  (star["localized-name"] || star.name) +
+  (star.designations ? ` | ${star.designations}` : "");
 
 /**
  * Fetch a stellar object

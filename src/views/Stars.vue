@@ -62,8 +62,12 @@ export default {
 
     this.weather = hourWeather.find(({ time_epoch }) => Math.abs(time_epoch - Date.now()) < 3600);
 
-    // Fetch stars
-    const names = [...await fetchPlanetNames(),  ...await fetchStarNames()];
+    // Fetch star names
+    const planets = (await fetchPlanetNames()).filter((s) => s != "Earth");
+    const stars = await fetchStarNames();
+    const names = [...planets,  ...stars];
+
+    // Fetch star objects
     for (const name of names) {
       const stellar = await fetchStellar(name);
       this.stars = [...this.stars, stellar];
