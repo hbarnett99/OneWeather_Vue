@@ -25,7 +25,7 @@
             </li>
 
             <li class="sidebar-item">
-              <router-link to="/stars" class="sidebar-link">
+              <router-link :to="{name:'stars', params: {lat, lng}}" class="sidebar-link" >
                 <i class="bi bi-grid-fill"></i>
                 <span>Stars</span>
               </router-link>
@@ -136,7 +136,7 @@
 
               <div class="col-12">
                 <div class="card">
-                  <router-view />
+                  <router-view @location="onLocation" />
                 </div>
               </div>
 
@@ -208,7 +208,20 @@
 <script>
 
 export default {
-  name: 'App'
+  name: 'App',
+  data() {
+    return {
+      // Default to Monash University Clayton
+      lat: "-37.914",
+      lng: "145.132"
+    };
+  },
+  methods: {
+    onLocation({lat, lng}) {
+      this.lat = String(lat);
+      this.lng = String(lng);
+    }
+  }
 };
 
 </script>

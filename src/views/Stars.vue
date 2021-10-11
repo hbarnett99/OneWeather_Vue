@@ -39,13 +39,15 @@ export default {
   name: "Stars",
 
   props: {
-    latitude: Number,
-    longitude: Number,
+    lat: String,
+    lng: String,
   },
 
   components: {
     StarList
   },
+
+  emits: ["location"],
 
   data() {
     // Retrieve stars from storage
@@ -61,18 +63,17 @@ export default {
   },
 
   async created() {
-    // Default to Monash University Clayton
-    const lat = this.latitude ?? -37.914;
-    const long = this.longitude ?? 145.132;
+    const lat = Number(this.lat);
+    const lng = Number(this.lng);
 
     // Weather at the current time
-    const res = await axios.get(`http://api.weatherapi.com/v1/history.json?key=721ef4891d454f2385304513211009&q=${lat},${long}&dt=` + currentDate());
+    const res = await axios.get(`http://api.weatherapi.com/v1/history.json?key=721ef4891d454f2385304513211009&q=${lat},${lng}&dt=` + currentDate());
     const hourWeather = res.data.forecast.forecastday[0].hour;
 
     this.weather = hourWeather.find(({ time_epoch }) => Math.abs(time_epoch - Date.now()) < 3600);
 
     // Move to location
-    await moveLocation(lat, long);
+    await moveLocation(lat, lng);
 
     // Fetch star names
     const planets = (await fetchPlanetNames()).filter((s) => s != "Earth");
