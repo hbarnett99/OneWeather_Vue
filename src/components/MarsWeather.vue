@@ -42,6 +42,7 @@ export default {
       minTemps: [],
       maxTemps: [],
       latestSol: "",
+      latestDate: "",
       averageMin: 0,
       averageMax: 0,
       marsPhoto: "",
@@ -51,20 +52,32 @@ export default {
   created(){
     this.mars();
     
+    
   },
   methods: {
     async mars() {
+      // gets data for the most recent sol on Mars that has the weather information available 
       const response = await axios.get(
         `https://api.maas2.apollorion.com/`
       );
+      // gets the sol value for the most recent sol on Mars
       this.latestSol = response.data.sol;
+      this.lastestDate = response.data.terrestrial_date.substring(0,10);
+      // calls the function to get the previous weather on Mars
+      this.getPhoto();
       this.getPastWeather();
     },
     async getPastWeather(){
+
+      const response = await axios.get(
+        `https://api.maas2.apollorion.com/`
+      );
+      // gets the sol value for the most recent sol on Mars
+      this.latestSol = response.data.sol;
+
       var sol = this.latestSol;
+      // loops
       for(let i = 0; i < 30; i++){
-        // this.WeeklySols.push(this.latestSol - i);
-        // for Weekly days
         const response = await axios.get(
           `https://api.maas2.apollorion.com/${sol}`
         );
@@ -78,7 +91,6 @@ export default {
           maxTemp: response.data.max_temp};
  
       }
-      this.getPhoto();
       this.getAverage();
     },
     getAverage(){
@@ -91,7 +103,7 @@ export default {
     },
     async getPhoto(){
       const response = await axios.get(
-        `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=${this.weather[0].date}&api_key=${this.apiKey}`
+        `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=${this.lastestDate}&api_key=${this.apiKey}`
       );
       // maybe change to get random photo from date
       this.marsPhoto = response.data.photos[8].img_src;
