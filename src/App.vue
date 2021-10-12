@@ -166,10 +166,12 @@ export default {
     },
     // Used to show/hide the sidebar if the screensize does not auto-include it
     menuToggle(){
+      // If the sidebar is open, close it
       if (document.getElementById('sidebar').classList.contains('active')) {
         document.getElementById('sidebar').classList.remove('active');
         this.deleteBackdrop();
       }
+      // if the sidebar is closed, open it
       else {
         document.getElementById('sidebar').classList.add('active');
         this.deleteBackdrop();
@@ -186,18 +188,15 @@ export default {
         this.menuToggle();
       }
     },
-    sidebarHide(){
-      document.getElementById('sidebar').classList.remove('active');
-      this.deleteBackdrop();
-    },
-    sidebarShow(){
 
-    },
+    //Deletes an item from favourites
     deleteItem(name){
       if (confirm('Are you sure to delete this location?')){
         this.locations = this.locations.filter((location) => location.name !== name);
       }
     },
+
+    //Adds an item to favourites
     addFavourite(location){
       var duplication = false;
       this.locations.forEach((loc) => {
@@ -209,9 +208,13 @@ export default {
         this.locations.push(location);
       }
     },
+
+    //Sorts favourites by alphabetical order
     sort(){
       this.locations.sort((a,b) => a.name.localeCompare(b.name));
     },
+
+    //Searches for location when called
     searchfav([lon, lat]){
       if (this.coords[0] !== lon && this.coords[1] !== lat){
         this.coords = [lon, lat];

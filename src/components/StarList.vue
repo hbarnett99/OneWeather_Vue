@@ -1,9 +1,12 @@
 <template>
   <div>
+<!--  Buttons for sorting  -->
     <div class="btn-group btn-group-toggle my-2" data-toggle="buttons">
       <button @click="sortName" class="btn btn-secondary">Name</button>
       <button @click="sortVis" class="btn btn-secondary">Visibility</button>
     </div>
+
+    <!--  Table for each list to add  -->
     <div style="height:200px;overflow:auto">
       <table class="table">
         <tr :key="starName(star)" v-for="star in stars_">

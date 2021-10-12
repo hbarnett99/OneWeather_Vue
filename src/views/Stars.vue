@@ -1,5 +1,6 @@
 <template>
 
+<!-- Base layout for Stars page, internal components are further called -->
   <div class="card-header">
     <h2>Stars</h2>
   </div>
