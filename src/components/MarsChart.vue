@@ -37,7 +37,7 @@ export default {
           enabled: true,
         },
         title: {
-          text: 'Temperature for the past 31 days'
+          text: 'Temperature for the past 30 days'
         }
       },
       series: [{

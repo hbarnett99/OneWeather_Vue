@@ -1,11 +1,11 @@
 <template>
     <h6>Weather measured by the Curosity Rover on Mars </h6>
-    <p> The weather is updated once each month with the data for the previous 31 days </p>
+    <p> The weather is updated once each month with the data for the previous 30 days </p>
     <br>
-    <img :src="`${this.marsPhoto}`" scrolling='no' frameborder='0' alt="image of Mars taken by the curosity rover">
+    <img :src="`${this.marsPhoto}`" scrolling='no' frameborder='0' alt="image of Mars taken by the Curosity Rover">
     <br>
     <br>
-    <h3> Past 31 days </h3>
+    <h3> Past 30 days </h3>
       <div style="height:350px;overflow:auto">
         <!-- <p> {{weatherData}} </p> -->
             <div v-for="day in weather"  :key="day">
@@ -17,9 +17,9 @@
            </div>
     </div>
     <br>
-    <strong> Weekly average minimum temperature: {{averageMin}}&#176; C </strong>
+    <strong> Monthly average minimum temperature: {{averageMin}}&#176; C </strong>
     <br>
-    <strong> Weekly average maximum temperature: {{averageMax}}&#176; C </strong>
+    <strong> Monthly average maximum temperature: {{averageMax}}&#176; C </strong>
     <div class="card-body" style="position: relative;">
       <MarsChart :dates="dates" :mintemp="minTemps" :maxtemp="maxTemps"/>
     </div>
