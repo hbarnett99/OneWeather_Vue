@@ -10,8 +10,8 @@
   </div>
   <div>
     <strong> Today: {{ data?.current?.last_updated }} || {{ data?.current?.condition.text }}</strong>
-    <p> Temperature (Feels Like): {{ data?.current?.feelslike_c }}&#176;C</p>
-    <p> Temperature (Actual): {{ data?.current?.temp_c }}&#176;C</p>
+    <p> Current Temperature (Feels Like): {{ data?.current?.feelslike_c }}&#176;C</p>
+    <p> Current Temperature (Actual): {{ data?.current?.temp_c }}&#176;C</p>
     <hr/>
 
     <p> Last Week: {{ data?.last_week_date}} || Max Temp: {{ data?.last_week_max}}&#176;C

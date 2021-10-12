@@ -8,13 +8,13 @@
 <script>
 import Item from './FavouriteItem.vue';
 export default {
-    name: "Items",
-    props: {
-        locations: Array
-    },
-    components: {
-        Item
-    },
-    emits: ['delete-item','search-fav']
+  name: "Items",
+  props: {
+    locations: Array
+  },
+  components: {
+    Item
+  },
+  emits: ['delete-item','search-fav']
 };
 </script>
