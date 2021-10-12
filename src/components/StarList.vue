@@ -5,7 +5,7 @@
       <button @click="sortVis" class="btn btn-secondary">Visibility</button>
     </div>
     <div style="height:200px;overflow:auto">
-      <table>
+      <table class="table">
         <tr :key="starName(star)" v-for="star in stars_">
           <td>
             <Star :star="star" :weather="weather" />
