@@ -5,8 +5,8 @@
       <button @click="sortVis" class="btn btn-secondary">Visibility</button>
     </div>
     <div style="height:200px;overflow:auto">
-      <table :key="starName(star)" v-for="star in stars_">
-        <tr>
+      <table>
+        <tr :key="starName(star)" v-for="star in stars_">
           <td>
             <Star :star="star" :weather="weather" />
           </td>
