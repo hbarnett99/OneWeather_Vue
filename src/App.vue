@@ -25,9 +25,16 @@
             </li>
 
             <li class="sidebar-item">
-              <router-link to="/stars" class="sidebar-link" @click="hideMenuOnRoute">
+              <router-link :to="{name:'stars', params: {lat, lng}}" class="sidebar-link" @click="hideMenuOnRoute" >
                 <i class="bi bi-grid-fill"></i>
                 <span>Stars</span>
+              </router-link>
+            </li>
+
+            <li class="sidebar-item">
+              <router-link to="/Mars" class="sidebar-link" @click="hideMenuOnRoute">
+                <i class="bi bi-grid-fill"></i>
+                <span>Mars</span>
               </router-link>
             </li>
 
@@ -78,91 +85,18 @@
         <div class="page-content">
           <section class="row">
             <div class="col-12 col-lg-9">
-              <!-- The following code is for the 'cards' that would appear above the container
-              <div class="row">
-                <div class="col-6 col-lg-3 col-md-6">
-                  <div class="card">
-                    <div class="card-body px-3 py-4-5">
-                      <div class="row">
-                        <div class="col-md-4">
-                          <div class="stats-icon purple">
-                            <i class="iconly-boldShow"></i>
-                          </div>
-                        </div>
-                        <div class="col-md-8">
-                          <h6 class="text-muted font-semibold">Card 1</h6>
-                          <h6 class="font-extrabold mb-0">112.000</h6>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-6 col-lg-3 col-md-6">
-                  <div class="card">
-                    <div class="card-body px-3 py-4-5">
-                      <div class="row">
-                        <div class="col-md-4">
-                          <div class="stats-icon blue">
-                            <i class="iconly-boldProfile"></i>
-                          </div>
-                        </div>
-                        <div class="col-md-8">
-                          <h6 class="text-muted font-semibold">Card 2</h6>
-                          <h6 class="font-extrabold mb-0">183.000</h6>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-6 col-lg-3 col-md-6">
-                  <div class="card">
-                    <div class="card-body px-3 py-4-5">
-                      <div class="row">
-                        <div class="col-md-4">
-                          <div class="stats-icon green">
-                            <i class="iconly-boldAdd-User"></i>
-                          </div>
-                        </div>
-                        <div class="col-md-8">
-                          <h6 class="text-muted font-semibold">Card 3</h6>
-                          <h6 class="font-extrabold mb-0">80.000</h6>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-6 col-lg-3 col-md-6">
-                  <div class="card">
-                    <div class="card-body px-3 py-4-5">
-                      <div class="row">
-                        <div class="col-md-4">
-                          <div class="stats-icon red">
-                            <i class="iconly-boldBookmark"></i>
-                          </div>
-                        </div>
-                        <div class="col-md-8">
-                          <h6 class="text-muted font-semibold">Card 4</h6>
-                          <h6 class="font-extrabold mb-0">112</h6>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div> -->
-
               <div class="row">
 
                 <!--        Start of Container      -->
 
                 <div class="col-12">
                   <div class="card">
-                    <router-view @add-favourite="addFavourite" :coords="coords"/>
+                    <router-view @add-favourite="addFavourite" @location="onLocation" :coords="coords"/>
                   </div>
                 </div>
+              </div>
 
                 <!--        End of Container      -->
-
-              </div>
             </div>
             <div class="col-12 col-lg-3">
               <div class="card">
@@ -218,11 +152,18 @@ export default {
   },
   data() {
     return {
-        locations: [],
-        coords: []
-      };
+      locations: [],
+      coords: [],
+      // Default to Monash University Clayton
+      lat: "-37.914",
+      lng: "145.132"
+    };
   },
   methods: {
+    onLocation({lat, lng}) {
+      this.lat = String(lat);
+      this.lng = String(lng);
+    },
     // Used to show/hide the sidebar if the screensize does not auto-include it
     menuToggle(){
       if (document.getElementById('sidebar').classList.contains('active')) {
@@ -275,8 +216,8 @@ export default {
       if (this.coords[0] !== lon && this.coords[1] !== lat){
         this.coords = [lon, lat];
       }
-        else {console.log();}
-      
+      else {console.log();}
+
     }
   }
 };
@@ -312,4 +253,4 @@ window.addEventListener('resize', () => {
 @import 'css/bootstrap.css';
 @import 'css/custom.css';
 @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@200&display=swap');
-</style> 
+</style>

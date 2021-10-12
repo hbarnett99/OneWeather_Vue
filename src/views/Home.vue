@@ -24,6 +24,8 @@ import Weather from '@/components/Weather';
 import DemoChart from '@/components/Chart.vue';
 import axios from 'axios';
 
+import { prevDate } from "../api/date";
+
 export default {
   name: 'App',
   props: {
@@ -52,64 +54,45 @@ export default {
       this.favCoords = [this.coords[0], this.coords[1]];
     }
   },
+  emits: ["location", 'add-favourite'],
   methods: {
-    handleCoords([lng, lat]) {
+    async handleCoords([lng, lat]) {
       if (lng && lat) {
-        axios.get(`http://api.weatherapi.com/v1/forecast.json?key=721ef4891d454f2385304513211009&q=${lat},${lng}&days=7`)
-          .then(response => {
-            this.data = response.data;
-            this.dates = this.data.forecast.forecastday.map(({date}) => date);
-            this.temps = this.data.forecast.forecastday.map(({day}) => day.avgtemp_c);
-            this.precipitation = this.data.forecast.forecastday.map(({day}) => day.daily_chance_of_rain);
-            console.log(this.dates);
-            console.log(this.temps);
-            console.log(this.data.forecast.forecastday);
-            console.log(this.precipitation);
-            console.log(this.data);
-          });
+        this.$emit("location", {lng, lat});
 
-        var today = new Date();
-        var lastweek = new Date(today.getFullYear(), today.getMonth(), today.getDate()-7);
-        var yesterday = new Date(today.getFullYear(), today.getMonth(), today.getDate()-1);
-        lastweek = lastweek.toLocaleDateString();
-        yesterday = yesterday.toLocaleDateString();
+        const yesterday = prevDate(1);
+        const lastWeek = prevDate(7);
 
-        var dateArr = lastweek.split("/");
-        dateArr = dateArr.reverse();
-        var dateOut = "";
-        for (var i = 0; i < dateArr.length; i++) {
-          dateOut = dateOut.concat(dateArr[i]);
-          if (i != dateArr.length - 1) {
-            dateOut = dateOut.concat("-");
-          }
-        }
-        lastweek = dateOut;
+        const response = await axios.get(`http://api.weatherapi.com/v1/forecast.json?key=721ef4891d454f2385304513211009&q=${lat},${lng}&days=7`);
 
-        dateArr = yesterday.split("/");
-        dateOut = "";
-        for (i = 0; i < dateArr.length; i++) {
-          dateOut = dateOut.concat(dateArr[i]);
-          if (i != dateArr.length - 1) {
-            dateOut = dateOut.concat("-");
-          }
-        }
-        yesterday = dateOut;
+        const response1 = await axios.get(`http://api.weatherapi.com/v1/history.json?key=721ef4891d454f2385304513211009&q=${lat},${lng}&dt=`+lastWeek);
+        this.data_lastweek = response1.data;
 
-        axios.get(`http://api.weatherapi.com/v1/history.json?key=721ef4891d454f2385304513211009&q=${lat},${lng}&dt=`+lastweek)
-          .then(response => {
-            this.data_lastweek = response.data;
-            console.log(this.data_lastweek);
-          });
+        const response2 = await axios.get(`http://api.weatherapi.com/v1/history.json?key=721ef4891d454f2385304513211009&q=${lat},${lng}&dt=`+yesterday);
+        this.data_yesterday = response2.data;
 
-        axios.get(`http://api.weatherapi.com/v1/history.json?key=721ef4891d454f2385304513211009&q=${lat},${lng}&dt=`+yesterday)
-          .then(response => {
-            this.data_yesterday = response.data;
-            console.log(this.data_yesterday);
-          });
+        this.data = response.data;
+        this.dates = this.data.forecast.forecastday.map(({date}) => date);
+        this.temps = this.data.forecast.forecastday.map(({day}) => day.avgtemp_c);
+        this.precipitation = this.data.forecast.forecastday.map(({day}) => day.daily_chance_of_rain);
+
+        let last_week_max = parseInt(this.data_lastweek?.forecast?.forecastday[0]?.day?.maxtemp_c);
+        let yesterday_max = parseInt(this.data_yesterday?.forecast?.forecastday[0]?.day?.maxtemp_c);
+        let today_max = parseInt(this.data?.forecast?.forecastday[0]?.day?.maxtemp_c);
+
+        let last_week_diff = last_week_max - today_max;
+        let yesterday_diff = yesterday_max - today_max;
+
+        this.data["last_week_diff"] = last_week_diff;
+        this.data["yesterday_diff"] = yesterday_diff;
+        this.data["yesterday_max"] = this.data_yesterday?.forecast?.forecastday[0]?.day?.maxtemp_c;
+        this.data["last_week_max"] = this.data_lastweek?.forecast?.forecastday[0]?.day?.maxtemp_c;
+        this.data["last_week_date"] = this.data_lastweek?.forecast?.forecastday[0]?.date;
+        this.data["yesterday_date"] = this.data_yesterday?.forecast?.forecastday[0]?.date;
+
       }
     },
-  },
-  emits: ['add-favourite']
+  }
 };
 </script>
 

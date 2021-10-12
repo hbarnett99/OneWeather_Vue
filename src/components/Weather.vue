@@ -14,11 +14,11 @@
     <p> Temperature (Actual): {{ data?.current?.temp_c }}&#176; C</p>
     <hr/>
 
-    <p> Last Week: {{ data_lastweek?.forecast?.forecastday[0]?.date}} || Max Temp: {{ data_lastweek?.forecast?.forecastday[0]?.day?.maxtemp_c}}
-    || Difference from Today: {{ temp1 }}&#176; C</p>
+    <p> Last Week: {{ data?.last_week_date}} || Max Temp: {{ data?.last_week_max}}
+    || Last Week was {{ data?.last_week_diff }} C different;</p>
 
-    <p> Yesterday: {{ data_yesterday?.forecast?.forecastday[0]?.date}} || Max Temp: {{ data_yesterday?.forecast?.forecastday[0]?.day?.maxtemp_c}}
-    || Difference from Today: {{ temp2 }}&#176; C </p>
+    <p> Yesterday: {{ data?.yesterday_date}} || Max Temp: {{ data?.yesterday_max}}
+    || Yesterday was {{ data?.yesterday_diff }} C different; </p>
     <hr/>
     <h3> 3-Day Forecast </h3>
     <div v-for="day in data?.forecast?.forecastday" :key="day.message">
@@ -35,16 +35,8 @@
 export default {
   name: "Weather",
   props: {
-    data: {},
-    data_lastweek: {},
-    data_yesterday: {}
+    data: {}
   },
-  updated() {
-    this.temp1 = (parseInt(this.data?.forecast?.forecastday[0]?.day?.maxtemp_c) - parseInt(this.data_lastweek?.forecast?.forecastday[0]?.day?.maxtemp_c)).toString();
-    this.temp2 = (parseInt(this.data?.forecast?.forecastday[0]?.day?.maxtemp_c) - parseInt(this.data_yesterday?.forecast?.forecastday[0]?.day?.maxtemp_c)).toString();
-    console.log(this.temp1);
-    console.log(this.temp2);
-  }
 };
 
 </script>
