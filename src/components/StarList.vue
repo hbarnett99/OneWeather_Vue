@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="btn-group btn-group-toggle my-3" data-toggle="buttons">
+    <div class="btn-group btn-group-toggle my-2" data-toggle="buttons">
       <button @click="sortName" class="btn btn-secondary">Name</button>
       <button @click="sortVis" class="btn btn-secondary">Visibility</button>
     </div>
@@ -11,7 +11,7 @@
             <Star :star="star" :weather="weather" />
           </td>
           <td class="m-auto">
-            <Button :text="text" :id="starName(star)" @btn-click="onClick" class="btn btn-outline-primary"/>
+            <Button :text="text" :id="starName(star)" @btn-click="onClick" class="btn btn-outline-primary btn-block btn-sm"/>
           </td>
         </tr>
       </table>

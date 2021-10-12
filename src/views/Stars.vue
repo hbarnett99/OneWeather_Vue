@@ -5,11 +5,11 @@
   </div>
   <div class="card-body" style="position: relative;">
     <div>
-      <h5>Watched stars</h5>
+      <h5 class="my-2">Watched stars</h5>
       <StarList @btn-click="removeStar" :stars="stars_" :weather="weather" text="Remove" />
     </div>
     <div>
-      <h5>Available stars</h5>
+      <h5 class="my-2">Available stars</h5>
       <StarList @btn-click="addStar" :stars="stars"  :weather="weather" text="Add" />
     </div>
   </div>
