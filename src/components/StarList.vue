@@ -6,12 +6,14 @@
     </div>
     <div style="height:200px;overflow:auto">
       <table :key="starName(star)" v-for="star in stars_">
-        <td>
-          <Star :star="star" :weather="weather" />
-        </td>
-        <td>
-          <Button :text="text" :id="starName(star)" @btn-click="onClick" class="btn btn-success"/>
-        </td>
+        <tr>
+          <td>
+            <Star :star="star" :weather="weather" />
+          </td>
+          <td>
+            <Button :text="text" :id="starName(star)" @btn-click="onClick" class="btn btn-outline-primary"/>
+          </td>
+        </tr>
       </table>
     </div>
   </div>
