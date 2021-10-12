@@ -144,6 +144,7 @@
 
 <script>
 import Items from './components/FavouriteItems.vue';
+const FAV_LIST = "fav_list";
 
 export default {
   name: 'App',
@@ -151,8 +152,10 @@ export default {
     Items,
   },
   data() {
+    const locations = JSON.parse(window.localStorage.getItem(FAV_LIST) ?? "[]");
+
     return {
-      locations: [],
+      locations,
       coords: [],
       // Default to Monash University Clayton
       lat: "-37.914",
@@ -196,6 +199,7 @@ export default {
     deleteItem(name){
       if (confirm('Are you sure to delete this location?')){
         this.locations = this.locations.filter((location) => location.name !== name);
+        window.localStorage.setItem(FAV_LIST, JSON.stringify(this.locations));
       }
     },
     addFavourite(location){
@@ -207,10 +211,12 @@ export default {
       });
       if (!duplication){
         this.locations.push(location);
+        window.localStorage.setItem(FAV_LIST, JSON.stringify(this.locations));
       }
     },
     sort(){
       this.locations.sort((a,b) => a.name.localeCompare(b.name));
+      window.localStorage.setItem(FAV_LIST, JSON.stringify(this.locations));
     },
     searchfav([lon, lat]){
       if (this.coords[0] !== lon && this.coords[1] !== lat){
