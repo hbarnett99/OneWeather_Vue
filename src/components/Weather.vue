@@ -14,12 +14,12 @@
     <p> Current Temperature (Actual): {{ data?.current?.temp_c }}&#176;C</p>
     <hr/>
 
+    <p> Yesterday: {{ data?.yesterday_date}} || Max Temp: {{ data?.yesterday_max}}&#176;C
+      || Yesterday was {{ data?.yesterday_diff }}&#176;C different; </p>
     <p> Last Week: {{ data?.last_week_date}} || Max Temp: {{ data?.last_week_max}}&#176;C
     || Last Week was {{ data?.last_week_diff }}&#176;C different;</p>
-
-    <p> Yesterday: {{ data?.yesterday_date}} || Max Temp: {{ data?.yesterday_max}}&#176;C
-    || Yesterday was {{ data?.yesterday_diff }}&#176;C different; </p>
     <hr/>
+
     <h3> 3-Day Forecast </h3>
     <div v-for="day in data?.forecast?.forecastday" :key="day.message">
        <strong> Date: {{ day.date }} || {{ day?.day?.condition?.text}}</strong>
