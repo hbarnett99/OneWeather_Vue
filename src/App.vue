@@ -158,6 +158,7 @@
                 <div class="card">
                   <router-view @location="onLocation" />
                 </div>
+              </div>
 
                 <!--        End of Container      -->
 
