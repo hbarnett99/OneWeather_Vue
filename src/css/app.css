@@ -748,7 +748,9 @@
 }
 .sidebar-wrapper {
   width: 300px;
-  height: 100vh;
+  max-width: 75vw;
+  height: auto;
+  min-height: 100%;
   position: fixed;
   top: 0;
   z-index: 10;

@@ -1,19 +1,24 @@
 <template>
-  <header>
-    <h4> Location: {{ data?.location?.name }} </h4>
+  <div class="row">
+    <header class="col">
+      <h4> Location: {{ data?.location?.name }} </h4>
+    </header>
+    <button class="btn btn-outline-warning col-auto mx-3 mb-3 mt-0">
+      Favourite
+    </button>
     <hr/>
-  </header>
+  </div>
   <div>
     <strong> Today: {{ data?.current?.last_updated }} || {{ data?.current?.condition.text }}</strong>
+    <p> Temperature (Feels Like): {{ data?.current?.feelslike_c }}&#176; C</p>
+    <p> Temperature (Actual): {{ data?.current?.temp_c }}&#176; C</p>
+    <hr/>
 
     <p> Last Week: {{ data?.last_week_date}} || Max Temp: {{ data?.last_week_max}}
     || Last Week was {{ data?.last_week_diff }} C different;</p>
 
     <p> Yesterday: {{ data?.yesterday_date}} || Max Temp: {{ data?.yesterday_max}}
     || Yesterday was {{ data?.yesterday_diff }} C different; </p>
-    <hr/>
-    <strong> Temperature (Feels Like): {{ data?.current?.feelslike_c }}&#176; C</strong>  <br/>
-    <strong> Temperature (Actual): {{ data?.current?.temp_c }}&#176; C</strong>
     <hr/>
     <h3> 3-Day Forecast </h3>
     <div v-for="day in data?.forecast?.forecastday" :key="day.message">

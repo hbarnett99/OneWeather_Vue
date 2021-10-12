@@ -24,6 +24,8 @@ import Weather from '@/components/Weather';
 import DemoChart from '@/components/Chart.vue';
 import axios from 'axios';
 
+import { prevDate } from "../api/date";
+
 export default {
   name: 'App',
   components: {
@@ -41,41 +43,18 @@ export default {
       precipitation: []
     };
   },
+  emits: ["location"],
   methods: {
-  async handleCoords([lng, lat]) {
+    async handleCoords([lng, lat]) {
       if (lng && lat) {
+        this.$emit("location", {lng, lat});
 
-        var today = new Date();
-        var lastweek = new Date(today.getFullYear(), today.getMonth(), today.getDate()-7);
-        var yesterday = new Date(today.getFullYear(), today.getMonth(), today.getDate()-1);
-        lastweek = lastweek.toLocaleDateString();
-        yesterday = yesterday.toLocaleDateString();
-
-        var dateArr = lastweek.split("/");
-        dateArr = dateArr.reverse();
-        var dateOut = "";
-        for (var i = 0; i < dateArr.length; i++) {
-          dateOut = dateOut.concat(dateArr[i]);
-          if (i != dateArr.length - 1) {
-            dateOut = dateOut.concat("-");
-          }
-        }
-        lastweek = dateOut;
-
-        dateArr = yesterday.split("/");
-        dateArr = dateArr.reverse();
-        dateOut = "";
-        for (i = 0; i < dateArr.length; i++) {
-          dateOut = dateOut.concat(dateArr[i]);
-          if (i != dateArr.length - 1) {
-            dateOut = dateOut.concat("-");
-          }
-        }
-        yesterday = dateOut;
+        const yesterday = prevDate(1);
+        const lastWeek = prevDate(7);
 
         const response = await axios.get(`http://api.weatherapi.com/v1/forecast.json?key=721ef4891d454f2385304513211009&q=${lat},${lng}&days=7`);
 
-        const response1 = await axios.get(`http://api.weatherapi.com/v1/history.json?key=721ef4891d454f2385304513211009&q=${lat},${lng}&dt=`+lastweek);
+        const response1 = await axios.get(`http://api.weatherapi.com/v1/history.json?key=721ef4891d454f2385304513211009&q=${lat},${lng}&dt=`+lastWeek);
         this.data_lastweek = response1.data;
 
         const response2 = await axios.get(`http://api.weatherapi.com/v1/history.json?key=721ef4891d454f2385304513211009&q=${lat},${lng}&dt=`+yesterday);
