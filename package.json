@@ -13,6 +13,7 @@
     "@pderas/vue2-geocoder": "^1.1.0",
     "apexcharts": "^3.28.1",
     "axios": "^0.21.4",
+    "bootstrap": "^5.1.1",
     "core-js": "^3.6.5",
     "mapbox-gl": "^2.4.1",
     "node-geocoder": "^3.27.0",

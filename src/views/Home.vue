@@ -9,10 +9,6 @@
   <div v-if="data?.location?.name != null">
     <div class="card-body" style="position: relative;">
       <Weather :data="data" :data_lastweek="data_lastweek" :data_yesterday="data_yesterday"/>
-      <p>
-      <input type="checkbox" v-on:change="historyToggle">
-      History: {{history}}
-      </p>
     </div>
     <div class="card-body" style="position: relative;">
       <DemoChart :dates="dates" :temps="temps" :precipitation="precipitation"/>
