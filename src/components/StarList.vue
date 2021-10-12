@@ -1,11 +1,16 @@
 <template>
   <div>
-    <button @click="sortName">Name</button><button @click="sortVis">Visibility</button>
+    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+      <button @click="sortName" class="btn btn-secondary">Name</button>
+      <button @click="sortVis" class="btn btn-secondary">Visibility</button>
+    </div>
     <div style="height:200px;overflow:auto">
       <table :key="starName(star)" v-for="star in stars_">
-        <td >
+        <td>
           <Star :star="star" :weather="weather" />
-          <Button :text="text" :id="starName(star)" @btn-click="onClick" />
+        </td>
+        <td>
+          <Button :text="text" :id="starName(star)" @btn-click="onClick" class="btn btn-success"/>
         </td>
       </table>
     </div>
