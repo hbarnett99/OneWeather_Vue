@@ -91,11 +91,7 @@ export default {
       this.addMarkers();
     },
     async addMarkers(){
-      const response = await axios.get(
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/${this.coordinates[0] + ',' + this.coordinates[1]}.json?access_token=${this.access_token}`
-      );
-      
-      
+
       if (this.allMarkers!==null) {
         for (var i = 0; i < this.allMarkers.length; i++) {
           this.allMarkers[i].remove();
@@ -106,12 +102,8 @@ export default {
       marker.setLngLat(this.coordinates);
       marker.addTo(this.map);
 
-      var popup = new mapboxgl.Popup({ offset: 45, closeOnClick: false, closeButton: false });
-      popup.setText(response.data.features[0].context[1].text);
-      // popup.setText(response.data.features[0].place_name);
-      marker.setPopup(popup);
       marker.addTo(this.map);
-      popup.addTo(this.map);
+
 
       this.allMarkers.push(marker);
       this.map.flyTo({
