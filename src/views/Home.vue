@@ -41,9 +41,12 @@ export default {
       precipitation: []
     };
   },
+  emits: ["location"],
   methods: {
     handleCoords([lng, lat]) {
       if (lng && lat) {
+        this.$emit("location", {lng, lat});
+
         axios.get(`http://api.weatherapi.com/v1/forecast.json?key=721ef4891d454f2385304513211009&q=${lat},${lng}&days=7`)
           .then(response => {
             this.data = response.data;

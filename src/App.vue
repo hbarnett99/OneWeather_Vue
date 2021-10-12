@@ -25,7 +25,7 @@
             </li>
 
             <li class="sidebar-item">
-              <router-link to="/stars" class="sidebar-link" @click="hideMenuOnRoute">
+              <router-link :to="{name:'stars', params: {lat, lng}}" class="sidebar-link" @click="hideMenuOnRoute" >
                 <i class="bi bi-grid-fill"></i>
                 <span>Stars</span>
               </router-link>
@@ -161,11 +161,11 @@
 
                 <!--        Start of Container      -->
 
-                <div class="col-12">
-                  <div class="card">
-                    <router-view/>
-                  </div>
+              <div class="col-12">
+                <div class="card">
+                  <router-view @location="onLocation" />
                 </div>
+              </div>
 
                 <!--        End of Container      -->
 
@@ -237,7 +237,18 @@
 
 export default {
   name: 'App',
+  data() {
+    return {
+      // Default to Monash University Clayton
+      lat: "-37.914",
+      lng: "145.132"
+    };
+  },
   methods: {
+    onLocation({lat, lng}) {
+      this.lat = String(lat);
+      this.lng = String(lng);
+    },
     // Used to show/hide the sidebar if the screensize does not auto-include it
     menuToggle(){
       if (document.getElementById('sidebar').classList.contains('active')) {
@@ -301,4 +312,4 @@ window.addEventListener('resize', () => {
 @import 'css/bootstrap.css';
 @import 'css/custom.css';
 @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@200&display=swap');
-</style> 
+</style>
