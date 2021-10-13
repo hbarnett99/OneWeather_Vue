@@ -172,12 +172,10 @@ export default {
       // If the sidebar is open, close it
       if (document.getElementById('sidebar').classList.contains('active')) {
         document.getElementById('sidebar').classList.remove('active');
-        this.deleteBackdrop();
       }
       // if the sidebar is closed, open it
       else {
         document.getElementById('sidebar').classList.add('active');
-        this.deleteBackdrop();
         const backdrop = document.createElement('div');
         backdrop.classList.add('sidebar-backdrop');
         backdrop.addEventListener('click', this.hide.bind(this));
