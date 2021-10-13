@@ -12,12 +12,6 @@
   </div>
 
   <div class="map-holder m-3">
-    <!-- <button
-    type="button"
-    class="location-btn"
-    @click="createMap"
-    >Search by map
-    </button> -->
     <div id="map"></div>
   </div>
 
@@ -26,8 +20,8 @@
 <script>
 import axios from "axios";
 import mapboxgl from "mapbox-gl";
-// eslint-disable-next-line no-unused-vars
-import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
+
+
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 export default {
   props: {
@@ -49,7 +43,8 @@ export default {
   },
   methods: {
     async createMap(){
-     
+    //  creates the map that is displayed on the webpage
+    // centred at Melbourne CBD
       mapboxgl.accessToken = this.access_token;
       this.map = new mapboxgl.Map({
         container: "map",
@@ -57,15 +52,17 @@ export default {
         center: this.center,
         zoom: 12,
       });
+      // gets the coords of the location when the user clicks on the map
       this.map.on('click', (e) => {
         const lat = e.lngLat.lat;
         const lng = e.lngLat.lng;
         this.coordinates[0] = lng;
         this.coordinates[1] = lat;
-    
+        // centres the map on the location the user clicked on
         this.map.flyTo({
           center: this.coordinates
         });
+        // emits the coords to be used by the weather component 
         this.$emit('coords-fetch', this.coordinates);
         this.addMarkers();
       });
@@ -74,14 +71,17 @@ export default {
       
     },
     async getCoords() {
+      // this is the search location function
+      // it takes the user input when searching a location and geocodes it to get the coords of that location
       let searchLocation = this.$refs.location.value;
+      // clears the search bar
       this.$refs.location.value = '';
       const response = await axios.get(
         `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(searchLocation)}.json?access_token=${this.access_token}`
       );
       // [lng,lat]
       
-
+      // gets the coords from the api call
       this.coordinates[1] = response.data.features[0].geometry.coordinates[1];
       this.coordinates[0] = response.data.features[0].geometry.coordinates[0];
       
@@ -91,7 +91,8 @@ export default {
       this.addMarkers();
     },
     async addMarkers(){
-
+      // adds a marker to the map for the users chosen location, search or click
+      // removes any other markers on the map
       if (this.allMarkers!==null) {
         for (var i = 0; i < this.allMarkers.length; i++) {
           this.allMarkers[i].remove();
@@ -104,7 +105,7 @@ export default {
 
       marker.addTo(this.map);
 
-
+      // centres the map on the coords
       this.allMarkers.push(marker);
       this.map.flyTo({
         center: this.coordinates
@@ -115,9 +116,9 @@ export default {
   emits: ['coords-fetch'],
   watch: {
     favCoords(){
+      // the coords of the location when the user saves it as a favourite
       this.coordinates[0] = this.favCoords[0];
       this.coordinates[1] = this.favCoords[1];
-      console.log('Search', this.coordinates);
       this.addMarkers();
     }
   }
@@ -129,11 +130,8 @@ export default {
 
 
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-/* .map-holder {
-  width: 65%;
-}*/
+
 #map {
   height: 30vh;
   /*width: 50%;*/
