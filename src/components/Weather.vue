@@ -1,25 +1,36 @@
+<!--
+Weather component
+This component handles the display of weather data.
+-->
+
 <template>
   <div class="row">
     <header class="col">
       <h4> Weather Station: {{ data?.location?.name }} </h4>
     </header>
+    <!-- Selectable favourite option -->
     <button @click="$emit('add-favourite', data.location)" class="btn btn-outline-warning col-auto mx-3 mb-3 mt-0">
       Favourite
     </button>
     <hr/>
   </div>
   <div>
+  <!-- Current weather data -->
     <strong> Today: {{ data?.current?.last_updated }} || {{ data?.current?.condition.text }}</strong>
     <p> Current Temperature (Feels Like): {{ data?.current?.feelslike_c }}&#176;C</p>
     <p> Current Temperature (Actual): {{ data?.current?.temp_c }}&#176;C</p>
     <hr/>
 
+    <!-- Yesterday's weather data -->
     <p> Yesterday: {{ data?.yesterday_date}} || Max Temp: {{ data?.yesterday_max}}&#176;C
       || Yesterday was {{ data?.yesterday_diff }}&#176;C different; </p>
+
+    <!-- Last week's weather data -->
     <p> Last Week: {{ data?.last_week_date}} || Max Temp: {{ data?.last_week_max}}&#176;C
     || Last Week was {{ data?.last_week_diff }}&#176;C different;</p>
     <hr/>
 
+    <!-- Displaying three day forecast -->
     <h3> 3-Day Forecast </h3>
     <div v-for="day in data?.forecast?.forecastday" :key="day.message">
        <strong> Date: {{ day.date }} || {{ day?.day?.condition?.text}}</strong>
@@ -35,6 +46,7 @@
 export default {
   name: "Weather",
   props: {
+    // data object which holds weather data
     data: {}
   },
 };
