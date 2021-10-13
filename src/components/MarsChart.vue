@@ -6,7 +6,7 @@
 
 <script>
 import VueApexCharts from "vue3-apexcharts";
-
+// similar to Chart.vue has been changed to fit the Mars weather data
 export default {
   name: 'MarsChart',
   components: {
@@ -41,11 +41,11 @@ export default {
         }
       },
       series: [{
-        name: 'Minimum Temperature(°C)',
+        name: 'Minimum Temperature (°C)',
         type: 'line',
         data: this.mintemp
       },{
-        name: 'Maximum Temperautre (°C)',
+        name: 'Maximum Temperature (°C)',
         type: 'line',
         data: this.maxtemp
       }]
@@ -56,6 +56,7 @@ export default {
       this.updateChart();
     },
     mintemp() {
+      // sets the given data to be able to be displayed
       this.series[0].data = this.mintemp;
     },
     maxtemp() {

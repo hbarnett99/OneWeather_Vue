@@ -115,8 +115,9 @@
  - Buttons on the 'Stars' page are not homogenous.
 
 ## Deployment Plan
- - 'npm run build' compresses the Vue framework into raw Javascript. This makes the site run much faster than what is shown today
+ - `npm run build` compresses the Vue framework into raw Javascript. This makes the site run much faster than what is shown today
  - This would be deployed to MEVN stack (MongoDB, Express.js VueJS & NodeJS) runnning on a web hosting service. Research into a suitable host would resulted in us settling for an Amazon EC2 host, as it is reliable, customisable and highly scalable.
+ - Using Gitlab, the CI pipeline can be implemented effortlessly by running the `npm run build` command in script in the `.gitlab-ci.yml` file. The CD pipeline would need to be configured as per the EC2 instance's requirements.
 
 ## Conclusion
 
