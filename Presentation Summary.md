@@ -83,9 +83,13 @@
         - The original NASA Mars API we planned to use was shut down as a means to conserve power for the space shuttle, the Insight, which is used gather metrics of Mars.
             - This meant the original goal to 'get the current weather on Mars' is no longer available, which had to be reformed into 'get the previous weather for the past 30 days' 
         - We also planned to include notifications for unusual weather on Mars. While being impacted by the previous issue, we don't know what dictates 'unusual weather' for Mars.
-            - This was reformed to include a min/max for the past 30 days, as well as a 
+            - This was reformed to include a min/max for the past 30 days, as well as an average min/max for past 30 days
     - Stars
         - Constelations was going to be included. This required us to manually create the constelations within our local Stellarium server, which was beyond our knowledge and scope.
+    - Weather
+	- A 7 day forecast was initially planned, however due to limitations with our api, we settled for a simpler 3 day forecast
+	- Previous 7 day forecast was going to be accessible by selecting a “history” option, again due to api limitations we settled for a comparison between previous week/day
+
 ### - Conflicting schedules
     - This was a Risk that was mostly accepted, where we worked with who was available to meet when we were required to. It was also exploited to meet more frequently in smaller groups at times to complete some tasks and features.
 ### - How were these Managed
