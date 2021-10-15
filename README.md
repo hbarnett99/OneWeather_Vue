@@ -108,4 +108,5 @@ Finalised features and polished up UI elements to provide a complete product
 	- Locations can be sorted in alphabetical order in the favourites list
 - Further UI updates were explored, allowing a dynamically changing app for mobile devices
 - Non functional requirements such as usability and compatibility were explored for a better user experience
+- Presentation about our completed product was included
 - 27 story points completed during this sprint
