@@ -95,3 +95,17 @@ Further iterated on above features for a more wholistic experience
     - Forecast & Graphing (Jai & Siyuan)
     - Refactoring for Navigation (Henry & Everyone individually)
     - UI updates (Henry & Nick)
+
+### 15/10/2021 Sprint 3
+Finalised features and polished up UI elements to provide a complete product
+- Fixed bug with the difference between max temp for today and lastweek/yesterday
+- Added feature to see the visibilty of stars at a specific location
+- Stars can be sorted from highest or lowest visibility in the star watch list
+- Included a weather on Mars feature which displays the temperature on Mars from the past 30 days
+	- A min/max average for the past 30 days is also displayed
+- Added the ability to add locations to a favourites list
+	- Locations can be removed from the favourites list
+	- Locations can be sorted in alphabetical order in the favourites list
+- Further UI updates were explored, allowing a dynamically changing app for mobile devices
+- Non functional requirements such as usability and compatibility were explored for a better user experience
+- 27 story points completed during this sprint
