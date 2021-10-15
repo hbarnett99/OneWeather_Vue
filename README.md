@@ -25,6 +25,15 @@ Sprint 2's goal is to completeley implement the *Forecast* Theme in its entireit
     - Search for all stars above the horizon & add/remove from watchlist
     - A total of 15 story points are expected to be completed
 
+### Sprint 3
+Sprint 3's goal is to completely implement ALL rest of epics and user stories for completing whole project, including Mars, Stars, Favourite list.
+- Further develop non-functional requirement to increase user experience
+    - Make application adaptive for different screen size
+- Further develop Sprint 2's functionality and implement new features
+    - Add Mars feature that display weather information for last 30 days
+    - Able to add/remove a location to/from favourite list, and quickly search that location
+    - Data from Stars and Favourites can be stored locally
+- Wrap up all features and functions to deliver final product of this project
 ---
 ## Links
 
@@ -106,6 +115,7 @@ Finalised features and polished up UI elements to provide a complete product
 - Added the ability to add locations to a favourites list
 	- Locations can be removed from the favourites list
 	- Locations can be sorted in alphabetical order in the favourites list
+    - Locations can be quickly searched by double click on it
 - Further UI updates were explored, allowing a dynamically changing app for mobile devices
 - Non functional requirements such as usability and compatibility were explored for a better user experience
 - Presentation about our completed product was included
