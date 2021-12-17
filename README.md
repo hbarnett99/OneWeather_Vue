@@ -35,7 +35,7 @@ Sprint 3's goal is to completely implement ALL rest of epics and user stories fo
     - Data from Stars and Favourites can be stored locally
 - Wrap up all features and functions to deliver final product of this project
 ---
-## Links
+## Links [Note - These are protected links, only those with granted permissions can view]
 
 [Google drive](https://drive.google.com/drive/u/1/folders/0AE06mPfab3N6Uk9PVA)
 
